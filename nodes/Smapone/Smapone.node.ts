@@ -14,8 +14,8 @@ import { bricksDescription } from './resources/intern/bricks/description';
 import { executeBricks } from './resources/intern/bricks/execute';
 import { bricksDefinitionDescription } from './resources/intern/bricksDefinition/description';
 import { executeBricksDefinition } from './resources/intern/bricksDefinition/execute';
-//import { smapsDefinitionDescription } from './resources/smapsDefinition';
-//import { smapsNotificationDescription } from './resources/smapsNotification';
+import { executeCorporationManagement } from './resources/intern/corporationManagement/execute';
+import { corporationManagementDescription } from './resources/intern/corporationManagement/description';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -57,14 +57,10 @@ export class Smapone implements INodeType {
 						name: 'BricksDefinition',
 						value: 'bricksDefinition',
 					},
-					/*{
-						name: 'Smaps Definition',
-						value: 'smapsDefinition',
-					},
 					{
-						name: 'Smaps Notification',
-						value: 'smapsNotification',
-					},*/
+						name: 'CorporationManagement',
+						value: 'corporationManagement',
+					}
 				],
 				default: 'account',
 			},
@@ -72,8 +68,7 @@ export class Smapone implements INodeType {
 			...accountDescription,
 			...bricksDescription,
 			...bricksDefinitionDescription,
-			//...smapsDefinitionDescription,
-			//...smapsNotificationDescription,
+			...corporationManagementDescription,
 		],
 	};
 
@@ -111,6 +106,16 @@ export class Smapone implements INodeType {
 				
 				case 'bricksDefinition':
 					responseData = await executeBricksDefinition.call(
+						this,
+						i,
+						operation,
+					);
+				
+					returnData.push(...responseData);
+					break;
+				
+				case 'corporationManagement':
+					responseData = await executeCorporationManagement.call(
 						this,
 						i,
 						operation,
