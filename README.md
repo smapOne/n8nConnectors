@@ -1,17 +1,7 @@
-# n8n-nodes-smapone
+# n8n Connector for smapOne API
 
 This is a repository for n8n connectors.
 It contains an n8n community node. It lets you use the smapOne API in your n8n workflows.
-
-[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/sustainable-use-license/) workflow automation platform.
-
-[Installation](#installation)
-[Operations](#operations)
-[Credentials](#credentials)
-[Compatibility](#compatibility)
-[Usage](#usage)
-[Resources](#resources)
-[Version history](#version-history)
 
 ## Installation
 
@@ -20,7 +10,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 ## Operations
 
 _List the operations supported by your node._
-TODO
+* TODO
 
 ## Credentials
 
@@ -29,18 +19,13 @@ All operations are authorized by an accessToken, that you can manage in your sma
 ## Compatibility
 
 Tested with the following versions:
-"eslint": 9.32.0
-"prettier": 3.6.2
-"release-it": ^19.0.4
-"typescript": 5.9.2
-"n8": 2.19.5
+* "eslint": 9.32.0
+* "prettier": 3.6.2
+* "release-it": ^19.0.4
+* "typescript": 5.9.2
+* "n8": 2.19.5
 
 ## Resources
 
 * [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
-*https://platform.smapone.com/swagger/index.html
-
-## Version history
-
-_This is another optional section. If your node has multiple versions, include a short description of available versions and what changed, as well as any compatibility impact._
-
+* [smapOne API Swagger documentation](https://platform.smapone.com/swagger/index.html)

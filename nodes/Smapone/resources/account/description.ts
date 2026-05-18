@@ -19,7 +19,7 @@ export const accountDescription: INodeProperties[] = [
 			},
 			{
 				name: 'Get',
-				value: 'get',
+				value: 'getAccount',
 				action: 'Get account information',
 			},
 			{

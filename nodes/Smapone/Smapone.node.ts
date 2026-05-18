@@ -10,6 +10,8 @@ import {
 
 import { accountDescription } from './resources/account/description';
 import { executeAccount } from './resources/account/execute';
+import { bricksDescription } from './resources/bricks/description';
+import { executeBricks } from './resources/bricks/execute';
 //import { smapsDefinitionDescription } from './resources/smapsDefinition';
 //import { smapsNotificationDescription } from './resources/smapsNotification';
 
@@ -45,6 +47,10 @@ export class Smapone implements INodeType {
 						name: 'Account',
 						value: 'account',
 					},
+					{
+						name: 'Bricks',
+						value: 'bricks',
+					},
 					/*{
 						name: 'Smaps Definition',
 						value: 'smapsDefinition',
@@ -58,6 +64,7 @@ export class Smapone implements INodeType {
 			},
 
 			...accountDescription,
+			...bricksDescription,
 			//...smapsDefinitionDescription,
 			//...smapsNotificationDescription,
 		],
@@ -74,14 +81,31 @@ export class Smapone implements INodeType {
 
 			let responseData;
 
-			if (resource === 'account') {
-				responseData = await executeAccount.call(
-					this,
-					i,
-					operation,
-				);
+			switch (resource) {
+				case 'account':
+					responseData = await executeAccount.call(
+						this,
+						i,
+						operation,
+					);
+					
+					returnData.push(...responseData);
+					break;
 				
-				returnData.push(...responseData);
+				case 'bricks':
+					responseData = await executeBricks.call(
+						this,
+						i,
+						operation,
+					);
+				
+					returnData.push(...responseData);
+					break;
+
+				default:
+					throw new NodeApiError(this.getNode(), {
+						message: `The resource "${resource}" is not supported.`,
+					});
 			}
 
 			if (responseData === undefined) {
