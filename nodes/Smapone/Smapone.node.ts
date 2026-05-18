@@ -26,6 +26,8 @@ import { exportTemplateDescription } from './resources/intern/exportTemplate/des
 import { executeExportTemplate } from './resources/intern/exportTemplate/execute';
 import { groupsDescription } from './resources/intern/groups/description';
 import { executeGroups } from './resources/intern/groups/execute';
+import { helperDescription } from './resources/intern/helper/description';
+import { executeHelper } from './resources/intern/helper/execute';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -87,6 +89,14 @@ export class Smapone implements INodeType {
 						name: 'ExportTemplate',
 						value: 'exportTemplate',
 					},
+					{
+						name: 'Groups',
+						value: 'groups',
+					},
+					{
+						name: 'Helper',
+						value: 'helper',
+					},
 				],
 				default: 'account',
 			},
@@ -100,6 +110,7 @@ export class Smapone implements INodeType {
 			...dataSourceVersionDescription,
 			...exportTemplateDescription,
 			...groupsDescription,
+			...helperDescription,
 		],
 	};
 
@@ -195,8 +206,18 @@ export class Smapone implements INodeType {
 					returnData.push(...responseData);
 					break;
 				
-					case 'groups':
+				case 'groups':
 					responseData = await executeGroups.call(
+						this,
+						i,
+						operation,
+					);
+				
+					returnData.push(...responseData);
+					break;
+				
+				case 'helper':
+					responseData = await executeHelper.call(
 						this,
 						i,
 						operation,
