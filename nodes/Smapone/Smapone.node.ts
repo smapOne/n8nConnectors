@@ -28,6 +28,8 @@ import { groupsDescription } from './resources/intern/groups/description';
 import { executeGroups } from './resources/intern/groups/execute';
 import { helperDescription } from './resources/intern/helper/description';
 import { executeHelper } from './resources/intern/helper/execute';
+import { scenariosDescription } from './resources/intern/scenarios/description';
+import { executeScenarios } from './resources/intern/scenarios/execute';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -97,6 +99,10 @@ export class Smapone implements INodeType {
 						name: 'Helper',
 						value: 'helper',
 					},
+					{
+						name: 'Scenarios',
+						value: 'scenarios',
+					},
 				],
 				default: 'account',
 			},
@@ -111,6 +117,7 @@ export class Smapone implements INodeType {
 			...exportTemplateDescription,
 			...groupsDescription,
 			...helperDescription,
+			...scenariosDescription,
 		],
 	};
 
@@ -218,6 +225,16 @@ export class Smapone implements INodeType {
 				
 				case 'helper':
 					responseData = await executeHelper.call(
+						this,
+						i,
+						operation,
+					);
+				
+					returnData.push(...responseData);
+					break;
+				
+				case 'scenarios':
+					responseData = await executeScenarios.call(
 						this,
 						i,
 						operation,
