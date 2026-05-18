@@ -5,7 +5,7 @@ import {
 	type INodeExecutionData,
 } from 'n8n-workflow';
 
-import { smaponeApiRequest } from '../../GenericFunctions';
+import { smaponeApiRequest } from '../../../GenericFunctions';
 
 export async function executeBricks(
 	this: IExecuteFunctions,

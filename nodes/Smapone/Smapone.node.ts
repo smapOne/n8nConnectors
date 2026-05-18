@@ -8,10 +8,10 @@ import {
 	type INodeTypeDescription,
 } from 'n8n-workflow';
 
-import { accountDescription } from './resources/account/description';
-import { executeAccount } from './resources/account/execute';
-import { bricksDescription } from './resources/bricks/description';
-import { executeBricks } from './resources/bricks/execute';
+import { accountDescription } from './resources/intern/account/description';
+import { executeAccount } from './resources/intern/account/execute';
+import { bricksDescription } from './resources/intern/bricks/description';
+import { executeBricks } from './resources/intern/bricks/execute';
 //import { smapsDefinitionDescription } from './resources/smapsDefinition';
 //import { smapsNotificationDescription } from './resources/smapsNotification';
 
