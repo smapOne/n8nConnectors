@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+
+# n8n local data
+.n8n/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# CLAUDE
+CLAUDE.md

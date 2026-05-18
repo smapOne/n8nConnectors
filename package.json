@@ -1,0 +1,40 @@
+{
+  "name": "n8n-nodes-smapone",
+  "version": "0.1.0",
+  "description": "smapOne API",
+  "license": "MIT",
+  "homepage": "",
+  "keywords": ["n8n-community-node-package"],
+  "author": {
+    "name": "Christopher Paschke",
+    "email": "christopher.paschke@smapone.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smapOne/n8nConnectors"
+  },
+  "scripts": {
+    "build": "n8n-node build",
+    "build:watch": "tsc --watch",
+    "dev": "n8n-node dev",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "release": "n8n-node release",
+    "prepublishOnly": "n8n-node prerelease"
+  },
+  "files": ["dist"],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "strict": false,
+    "credentials": ["dist/credentials/SmaponeApi.credentials.js"],
+    "nodes": ["dist/nodes/Smapone/Smapone.node.js"]
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "*",
+    "eslint": "9.32.0",
+    "prettier": "3.6.2",
+    "release-it": "^19.0.4",
+    "typescript": "5.9.2"
+  },
+  "peerDependencies": { "n8n-workflow": "*" }
+}
