@@ -16,6 +16,8 @@ import { bricksDefinitionDescription } from './resources/intern/bricksDefinition
 import { executeBricksDefinition } from './resources/intern/bricksDefinition/execute';
 import { executeCorporationManagement } from './resources/intern/corporationManagement/execute';
 import { corporationManagementDescription } from './resources/intern/corporationManagement/description';
+import { dataSourceDescription } from './resources/intern/dataSource/description';
+import { executeDataSource } from './resources/intern/dataSource/execute';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -60,7 +62,11 @@ export class Smapone implements INodeType {
 					{
 						name: 'CorporationManagement',
 						value: 'corporationManagement',
-					}
+					},
+					{
+						name: 'DataSource',
+						value: 'dataSource',
+					},
 				],
 				default: 'account',
 			},
@@ -69,6 +75,7 @@ export class Smapone implements INodeType {
 			...bricksDescription,
 			...bricksDefinitionDescription,
 			...corporationManagementDescription,
+			...dataSourceDescription,
 		],
 	};
 
@@ -116,6 +123,16 @@ export class Smapone implements INodeType {
 				
 				case 'corporationManagement':
 					responseData = await executeCorporationManagement.call(
+						this,
+						i,
+						operation,
+					);
+				
+					returnData.push(...responseData);
+					break;
+				
+				case 'dataSource':
+					responseData = await executeDataSource.call(
 						this,
 						i,
 						operation,
