@@ -18,6 +18,8 @@ import { executeCorporationManagement } from './resources/intern/corporationMana
 import { corporationManagementDescription } from './resources/intern/corporationManagement/description';
 import { dataSourceDescription } from './resources/intern/dataSource/description';
 import { executeDataSource } from './resources/intern/dataSource/execute';
+import { dataSourceDefinitionDescription } from './resources/intern/dataSourceDefinition/description';
+import { executeDataSourceDefinition } from './resources/intern/dataSourceDefinition/execute';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -67,6 +69,10 @@ export class Smapone implements INodeType {
 						name: 'DataSource',
 						value: 'dataSource',
 					},
+					{
+						name: 'DataSourceDefinition',
+						value: 'dataSourceDefinition',
+					}
 				],
 				default: 'account',
 			},
@@ -76,6 +82,7 @@ export class Smapone implements INodeType {
 			...bricksDefinitionDescription,
 			...corporationManagementDescription,
 			...dataSourceDescription,
+			...dataSourceDefinitionDescription,
 		],
 	};
 
@@ -140,7 +147,17 @@ export class Smapone implements INodeType {
 				
 					returnData.push(...responseData);
 					break;
-
+				
+				case 'dataSourceDefinition':
+					responseData = await executeDataSourceDefinition.call(
+						this,
+						i,
+						operation,
+					);
+				
+					returnData.push(...responseData);
+					break;
+				
 				default:
 					throw new NodeApiError(this.getNode(), {
 						message: `The resource "${resource}" is not supported.`,
