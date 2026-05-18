@@ -32,6 +32,8 @@ import { scenariosDescription } from './resources/intern/scenarios/description';
 import { executeScenarios } from './resources/intern/scenarios/execute';
 import { smapsDescription } from './resources/intern/smaps/description';
 import { executeSmaps } from './resources/intern/smaps/execute';
+import { executeSmapsData } from './resources/intern/smapsData/execute';
+import { smapsDataDescription } from './resources/intern/smapsData/description';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -109,6 +111,10 @@ export class Smapone implements INodeType {
 						name: 'Smaps',
 						value: 'smaps',
 					},
+					{
+						name: 'SmapsData',
+						value: 'smapsData',
+					},
 				],
 				default: 'account',
 			},
@@ -125,6 +131,7 @@ export class Smapone implements INodeType {
 			...helperDescription,
 			...scenariosDescription,
 			...smapsDescription,
+			...smapsDataDescription,
 		],
 	};
 
@@ -252,6 +259,16 @@ export class Smapone implements INodeType {
 				
 				case 'smaps':
 					responseData = await executeSmaps.call(
+						this,
+						i,
+						operation,
+					);
+				
+					returnData.push(...responseData);
+					break;
+				
+				case 'smapsData':
+					responseData = await executeSmapsData.call(
 						this,
 						i,
 						operation,
