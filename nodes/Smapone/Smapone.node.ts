@@ -22,6 +22,8 @@ import { dataSourceDefinitionDescription } from './resources/intern/dataSourceDe
 import { executeDataSourceDefinition } from './resources/intern/dataSourceDefinition/execute';
 import { dataSourceVersionDescription } from './resources/intern/dataSourceVersion/description';
 import { executeDataSourceVersion } from './resources/intern/dataSourceVersion/execute';
+import { exportTemplateDescription } from './resources/intern/exportTemplate/description';
+import { executeExportTemplate } from './resources/intern/exportTemplate/execute';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -79,6 +81,10 @@ export class Smapone implements INodeType {
 						name: 'DataSourceVersion',
 						value: 'dataSourceVersion',
 					},
+					{
+						name: 'ExportTemplate',
+						value: 'exportTemplate',
+					},
 				],
 				default: 'account',
 			},
@@ -90,6 +96,7 @@ export class Smapone implements INodeType {
 			...dataSourceDescription,
 			...dataSourceDefinitionDescription,
 			...dataSourceVersionDescription,
+			...exportTemplateDescription,
 		],
 	};
 
@@ -167,6 +174,16 @@ export class Smapone implements INodeType {
 
 				case 'dataSourceVersion':
 					responseData = await executeDataSourceVersion.call(
+						this,
+						i,
+						operation,
+					);
+				
+					returnData.push(...responseData);
+					break;
+				
+				case 'exportTemplate':
+					responseData = await executeExportTemplate.call(
 						this,
 						i,
 						operation,
