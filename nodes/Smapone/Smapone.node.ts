@@ -48,6 +48,8 @@ import { executeSubscriptions } from './resources/intern/subscriptions/execute';
 import { subscriptionsDescription } from './resources/intern/subscriptions/description';
 import { executeSubscriptionsTokens } from './resources/intern/subscriptionsTokens/execute';
 import { subscriptionsTokensDescription } from './resources/intern/subscriptionsTokens/description';
+import { templatesDescription } from './resources/intern/templates/description';
+import { executeTemplates } from './resources/intern/templates/execute';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -150,12 +152,16 @@ export class Smapone implements INodeType {
 						value: 'smapsVersions',
 					},
 					{
-						name: 'subscriptions',
+						name: 'Subscriptions',
 						value: 'subscriptions',
 					},
 					{
-						name: 'subscriptionsTokens',
+						name: 'SubscriptionsTokens',
 						value: 'subscriptionsTokens',
+					},
+					{
+						name: 'Templates',
+						value: 'templates',
 					},
 				],
 				default: 'account',
@@ -181,6 +187,7 @@ export class Smapone implements INodeType {
 			...smapsVersionsDescription,
 			...subscriptionsDescription,
 			...subscriptionsTokensDescription,
+			...templatesDescription,
 		],
 	};
 
@@ -388,6 +395,16 @@ export class Smapone implements INodeType {
 
 				case 'subscriptionsTokens':
 					responseData = await executeSubscriptionsTokens.call(
+						this,
+						i,
+						operation,
+					);
+				
+					returnData.push(...responseData);
+					break;
+
+				case 'templates':
+					responseData = await executeTemplates.call(
 						this,
 						i,
 						operation,
