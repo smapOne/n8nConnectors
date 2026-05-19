@@ -50,6 +50,8 @@ import { executeSubscriptionsTokens } from './resources/intern/subscriptionsToke
 import { subscriptionsTokensDescription } from './resources/intern/subscriptionsTokens/description';
 import { templatesDescription } from './resources/intern/templates/description';
 import { executeTemplates } from './resources/intern/templates/execute';
+import { executeUserImport } from './resources/intern/userImport/execute';
+import { userImportDescription } from './resources/intern/userImport/description';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -163,6 +165,10 @@ export class Smapone implements INodeType {
 						name: 'Templates',
 						value: 'templates',
 					},
+					{
+						name: 'UserImports',
+						value: 'userImports',
+					},
 				],
 				default: 'account',
 			},
@@ -188,6 +194,7 @@ export class Smapone implements INodeType {
 			...subscriptionsDescription,
 			...subscriptionsTokensDescription,
 			...templatesDescription,
+			...userImportDescription,
 		],
 	};
 
@@ -405,6 +412,13 @@ export class Smapone implements INodeType {
 
 				case 'templates':
 					responseData = await executeTemplates.call(
+						this,
+						i,
+						operation,
+					);
+
+				case 'userImport':
+					responseData = await executeUserImport.call(
 						this,
 						i,
 						operation,
