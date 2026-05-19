@@ -54,6 +54,8 @@ import { executeUserImport } from './resources/intern/userImport/execute';
 import { userImportDescription } from './resources/intern/userImport/description';
 import { usersDescription } from './resources/intern/users/description';
 import { executeUsers } from './resources/intern/users/execute';
+import { usersTokensDescription } from './resources/intern/usersTokens/description';
+import { executeUsersTokens } from './resources/intern/usersTokens/execute';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -175,6 +177,10 @@ export class Smapone implements INodeType {
 						name: 'Users',
 						value: 'users',
 					},
+					{
+						name: 'UsersTokens',
+						value: 'usersTokens',
+					},
 				],
 				default: 'account',
 			},
@@ -202,6 +208,7 @@ export class Smapone implements INodeType {
 			...templatesDescription,
 			...userImportDescription,
 			...usersDescription,
+			...usersTokensDescription,
 		],
 	};
 
@@ -433,6 +440,13 @@ export class Smapone implements INodeType {
 
 				case 'users':
 					responseData = await executeUsers.call(
+						this,
+						i,
+						operation,
+					);
+
+				case 'usersTokens':
+					responseData = await executeUsersTokens.call(
 						this,
 						i,
 						operation,
