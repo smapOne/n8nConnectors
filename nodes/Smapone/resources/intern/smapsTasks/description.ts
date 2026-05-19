@@ -1,6 +1,6 @@
 import type { INodeProperties } from 'n8n-workflow';
 
-export const smapsNotificationDescription: INodeProperties[] = [
+export const smapsTasksDescription: INodeProperties[] = [
 	{
 		displayName: 'Operation',
 		name: 'operation',
@@ -8,27 +8,17 @@ export const smapsNotificationDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
-				resource: ['smapsNotification'],
+				resource: ['smapsTasks'],
 			},
 		},
 		options: [
 			{
-				name: 'Get Configured Webhook Information',
-				value: 'getConfiguredWebhookInformation',
-				action: 'Get the configured webhook information',
-			},
-			{
-				name: 'Overwrite Webhook Configuration',
-				value: 'overwriteWebhookConfiguration',
-				action: 'Overwrite the webhook configuration',
-			},
-			{
-				name: 'Remove Webhook Configuration',
-				value: 'removeWebhookConfiguration',
-				action: 'Remove the webhook configuration',
+				name: 'Change State of Task and Assign Task to User',
+				value: 'changeStateOfTaskAndAssignTaskToUser',
+				action: 'Change the state of a task and assign a task to a user',
 			},
 		],
-		default: 'getConfiguredWebhookInformation',
+		default: 'changeStateOfTaskAndAssignTaskToUser',
 	},
 
 	{
@@ -39,10 +29,38 @@ export const smapsNotificationDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
-				resource: ['smapsNotification'],
+				resource: ['smapsTasks'],
 			},
 		},
 		description: 'ID of the smap',
+	},
+
+	{
+		displayName: 'Version',
+		name: 'version',
+		type: 'string',
+		required: true,
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['smapsTasks'],
+			},
+		},
+		description: 'Version of the smap',
+	},
+
+	{
+		displayName: 'Task ID',
+		name: 'taskId',
+		type: 'string',
+		required: true,
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['smapsTasks'],
+			},
+		},
+		description: 'ID of the task',
 	},
 
 	{
@@ -53,8 +71,8 @@ export const smapsNotificationDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
-				resource: ['smapsNotification'],
-				operation: ['overwriteWebhookConfiguration'],
+				resource: ['smapsTasks'],
+				operation: ['changeStateOfTaskAndAssignTaskToUser'],
 			},
 		},
 		description: 'JSON body sent to the API',

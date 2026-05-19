@@ -1,6 +1,6 @@
 import type { INodeProperties } from 'n8n-workflow';
 
-export const dataSourceDescription: INodeProperties[] = [
+export const dataSourceVersionDescription: INodeProperties[] = [
 	{
 		displayName: 'Operation',
 		name: 'operation',
@@ -8,37 +8,32 @@ export const dataSourceDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
-				resource: ['dataSource'],
+				resource: ['dataSourceVersion'],
 			},
 		},
 		options: [
 			{
-				name: 'Create New Datasource of Type Static Table',
-				value: 'createNewDatasourceOfTypeStaticTable',
-				action: 'Create new datasource of type static table',
+				name: 'Retrieve Latest Minor Version of Major Version With Definition and Data Rows',
+				value: 'retrieveLatestMinorVersionOfMajorVersionWithDefinitionAndDataRows',
+				action: 'Retrieve the latest minor version of this major version with definition and data rows',
 			},
 			{
-				name: 'Delete Datasource Including All Source Versions',
-				value: 'deleteDatasourceIncludingAllSourceVersions',
-				action: 'Delete a datasource including all source versions',
+				name: 'Retrieve List of Versions of Specific Data Source',
+				value: 'retrieveListOfVersionsOfSpecificDataSource',
+				action: 'Retrieve the list of versions of a specific data source',
 			},
 			{
-				name: 'Get DataSource With Meta Information',
-				value: 'getDataSourceWithMetaInformation',
-				action: 'Get a datasource with meta information',
+				name: 'Retrieve Specific Version of Data Source',
+				value: 'retrieveSpecificVersionOfDataSource',
+				action: 'Retrieve the specific version of the data source',
 			},
 			{
-				name: 'Get List With Meta Information of Available Datasource',
-				value: 'getListWithMetaInformationOfAvailableDatasource',
-				action: 'Get list with meta information of available datasource',
-			},
-			{
-				name: 'Update Title of Data Source',
-				value: 'updateTitleOfDataSource',
-				action: 'Update the title of a data source',
+				name: 'Update Static Table in Structure and Data',
+				value: 'updateStaticTableInStructureAndData',
+				action: 'Update a static table in structure and data',
 			},
 		],
-		default: 'getListWithMetaInformationOfAvailableDatasource',
+		default: 'retrieveListOfVersionsOfSpecificDataSource',
 	},
 
 	{
@@ -49,15 +44,40 @@ export const dataSourceDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
-				resource: ['dataSource'],
-				operation: [
-					'deleteDatasourceIncludingAllSourceVersions',
-					'getDataSourceWithMetaInformation',
-					'updateTitleOfDataSource',
-				],
+				resource: ['dataSourceVersion'],
 			},
 		},
 		description: 'ID of the data source',
+	},
+
+	{
+		displayName: 'Data Source Version',
+		name: 'dataSourceVersion',
+		type: 'string',
+		required: true,
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['dataSourceVersion'],
+				operation: ['retrieveSpecificVersionOfDataSource'],
+			},
+		},
+		description: 'Version of the data source',
+	},
+
+	{
+		displayName: 'Major Version',
+		name: 'majorVersion',
+		type: 'string',
+		required: true,
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['dataSourceVersion'],
+				operation: ['retrieveLatestMinorVersionOfMajorVersionWithDefinitionAndDataRows'],
+			},
+		},
+		description: 'Major version of the data source',
 	},
 
 	{
@@ -68,25 +88,10 @@ export const dataSourceDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
-				resource: ['dataSource'],
-				operation: ['createNewDatasourceOfTypeStaticTable'],
+				resource: ['dataSourceVersion'],
+				operation: ['updateStaticTableInStructureAndData'],
 			},
 		},
 		description: 'JSON body sent to the API',
-	},
-
-	{
-		displayName: 'Title',
-		name: 'title',
-		type: 'string',
-		required: true,
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['dataSource'],
-				operation: ['updateTitleOfDataSource'],
-			},
-		},
-		description: 'New title of the data source',
 	},
 ];

@@ -7,7 +7,7 @@ import {
 
 import { smaponeApiRequest } from '../../../GenericFunctions';
 
-export async function executeSmapsNotification(
+export async function executeSmapsTasks(
 	this: IExecuteFunctions,
 	i: number,
 	operation: string,
@@ -15,44 +15,29 @@ export async function executeSmapsNotification(
 	let responseData: IDataObject | IDataObject[];
 
 	switch (operation) {
-		case 'getConfiguredWebhookInformation': {
+		case 'changeStateOfTaskAndAssignTaskToUser': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
-
-			responseData = await smaponeApiRequest.call(
-				this,
-				'GET',
-				`/intern/Smaps/${encodeURIComponent(smapId)}/Notification/Data/Webhook`,
-			);
-			break;
-		}
-
-		case 'overwriteWebhookConfiguration': {
-			const smapId = this.getNodeParameter('smapId', i) as string;
+			const version = this.getNodeParameter('version', i) as string;
+			const taskId = this.getNodeParameter('taskId', i) as string;
 			const body = this.getNodeParameter('body', i) as IDataObject;
 
 			responseData = await smaponeApiRequest.call(
 				this,
 				'PUT',
-				`/intern/Smaps/${encodeURIComponent(smapId)}/Notification/Data/Webhook`,
+				`/intern/Smaps/${encodeURIComponent(
+					smapId,
+				)}/Versions/${encodeURIComponent(
+					version,
+				)}/Tasks/${encodeURIComponent(taskId)}/State`,
 				body,
 			);
-			break;
-		}
 
-		case 'removeWebhookConfiguration': {
-			const smapId = this.getNodeParameter('smapId', i) as string;
-
-			responseData = await smaponeApiRequest.call(
-				this,
-				'DELETE',
-				`/intern/Smaps/${encodeURIComponent(smapId)}/Notification/Data/Webhook`,
-			);
 			break;
 		}
 
 		default:
 			throw new NodeApiError(this.getNode(), {
-				message: `The operation "${operation}" is not supported for resource "smapsNotification".`,
+				message: `The operation "${operation}" is not supported for resource "smapsTasks".`,
 			});
 	}
 
