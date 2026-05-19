@@ -42,6 +42,8 @@ import { smapsTasksDescription } from './resources/intern/smapsTasks/description
 import { executeSmapsTasks } from './resources/intern/smapsTasks/execute';
 import { executeSmapsTokens } from './resources/intern/smapsTokens/execute';
 import { smapsTokensDescription } from './resources/intern/smapsTokens/description';
+import { smapsVersionsDescription } from './resources/intern/smapsVersions/description';
+import { executeSmapsVersions } from './resources/intern/smapsVersions/execute';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -139,6 +141,10 @@ export class Smapone implements INodeType {
 						name: 'SmapsTokens',
 						value: 'smapsTokens',
 					},
+					{
+						name: 'SmapsVersions',
+						value: 'smapsVersions',
+					},
 				],
 				default: 'account',
 			},
@@ -160,6 +166,7 @@ export class Smapone implements INodeType {
 			...smapsNotificationDescription,
 			...smapsTasksDescription,
 			...smapsTokensDescription,
+			...smapsVersionsDescription,
 		],
 	};
 
@@ -337,6 +344,16 @@ export class Smapone implements INodeType {
 
 				case 'smapsTokens':
 					responseData = await executeSmapsTokens.call(
+						this,
+						i,
+						operation,
+					);
+				
+					returnData.push(...responseData);
+					break;
+
+				case 'smapsVersions':
+					responseData = await executeSmapsVersions.call(
 						this,
 						i,
 						operation,
