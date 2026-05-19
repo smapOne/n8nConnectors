@@ -8,6 +8,7 @@ export const scenariosDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['scenarios'],
 			},
 		},
@@ -39,6 +40,7 @@ export const scenariosDescription: INodeProperties[] = [
 		default: 'en',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['scenarios'],
 				operation: ['loadListOfPredefinedScenariosByLanguage'],
 			},

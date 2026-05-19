@@ -8,6 +8,7 @@ export const subscriptionsDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['subscriptions'],
 			},
 		},
@@ -74,6 +75,7 @@ export const subscriptionsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['subscriptions'],
 				operation: [
 					'addSmapToGroup',
@@ -99,6 +101,7 @@ export const subscriptionsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['subscriptions'],
 				operation: [
 					'addSmapToGroup',
@@ -118,6 +121,7 @@ export const subscriptionsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['subscriptions'],
 				operation: [
 					'addSmapToGroup',
@@ -137,6 +141,7 @@ export const subscriptionsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['subscriptions'],
 				operation: ['getUserDetails'],
 			},

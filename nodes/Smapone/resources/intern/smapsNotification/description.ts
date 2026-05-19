@@ -8,6 +8,7 @@ export const smapsNotificationDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsNotification'],
 			},
 		},
@@ -39,6 +40,7 @@ export const smapsNotificationDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsNotification'],
 			},
 		},
@@ -53,6 +55,7 @@ export const smapsNotificationDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsNotification'],
 				operation: ['overwriteWebhookConfiguration'],
 			},

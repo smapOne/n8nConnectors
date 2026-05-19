@@ -8,6 +8,7 @@ export const userImportDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['userImport'],
 			},
 		},
@@ -34,6 +35,7 @@ export const userImportDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['userImport'],
 				operation: ['createOrUpdateUsers'],
 			},

@@ -8,6 +8,7 @@ export const templatesDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['templates'],
 			},
 		},

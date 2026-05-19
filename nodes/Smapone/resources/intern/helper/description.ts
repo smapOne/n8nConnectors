@@ -8,6 +8,7 @@ export const helperDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['helper'],
 			},
 		},
@@ -29,6 +30,7 @@ export const helperDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['helper'],
 				operation: ['matchGivenExamplesAgainstRegularExpression'],
 			},

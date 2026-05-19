@@ -8,6 +8,7 @@ export const accountDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['account'],
 			},
 		},
@@ -59,6 +60,7 @@ export const accountDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['account'],
 				operation: ['getSetting', 'updateSetting', 'deleteSetting'],
 			},
@@ -74,6 +76,7 @@ export const accountDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['account'],
 				operation: ['updateSetting'],
 			},

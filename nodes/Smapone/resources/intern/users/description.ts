@@ -8,6 +8,7 @@ export const usersDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['users'],
 			},
 		},
@@ -49,6 +50,7 @@ export const usersDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['users'],
 				operation: [
 					'deleteSmapUser',
@@ -68,6 +70,7 @@ export const usersDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['users'],
 				operation: ['createOrUpdateUsers'],
 			},

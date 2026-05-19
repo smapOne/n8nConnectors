@@ -8,6 +8,7 @@ export const subscriptionsTokensDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['subscriptionsTokens'],
 			},
 		},
@@ -49,6 +50,7 @@ export const subscriptionsTokensDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['subscriptionsTokens'],
 			},
 		},
@@ -63,6 +65,7 @@ export const subscriptionsTokensDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['subscriptionsTokens'],
 				operation: [
 					'createUserTokenAndPublishViaEmail',
@@ -83,6 +86,7 @@ export const subscriptionsTokensDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['subscriptionsTokens'],
 				operation: ['getTokenOfSmap', 'wipeTokenOfSmap'],
 			},
@@ -98,6 +102,7 @@ export const subscriptionsTokensDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['subscriptionsTokens'],
 				operation: ['getUserDetails'],
 			},
@@ -113,6 +118,7 @@ export const subscriptionsTokensDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['subscriptionsTokens'],
 				operation: ['createUserTokenAndPublishViaEmail'],
 			},

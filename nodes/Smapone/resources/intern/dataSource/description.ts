@@ -8,6 +8,7 @@ export const dataSourceDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['dataSource'],
 			},
 		},
@@ -49,6 +50,7 @@ export const dataSourceDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['dataSource'],
 				operation: [
 					'deleteDatasourceIncludingAllSourceVersions',
@@ -68,6 +70,7 @@ export const dataSourceDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['dataSource'],
 				operation: ['createNewDatasourceOfTypeStaticTable'],
 			},
@@ -83,6 +86,7 @@ export const dataSourceDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['dataSource'],
 				operation: ['updateTitleOfDataSource'],
 			},

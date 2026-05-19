@@ -8,6 +8,7 @@ export const smapsTokensDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsTokens'],
 			},
 		},
@@ -74,6 +75,7 @@ export const smapsTokensDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsTokens'],
 			},
 		},
@@ -88,6 +90,7 @@ export const smapsTokensDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsTokens'],
 				operation: [
 					'generateQrCodeForGivenSmap',
@@ -108,6 +111,7 @@ export const smapsTokensDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsTokens'],
 				operation: ['wipeGroupFromSmap'],
 			},
@@ -123,6 +127,7 @@ export const smapsTokensDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsTokens'],
 				operation: [
 					'createAnonymousTokenAndPublishViaEmail',

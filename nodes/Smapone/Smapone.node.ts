@@ -80,10 +80,32 @@ export class Smapone implements INodeType {
 		],
 		properties: [
 			{
+				displayName: 'API',
+				name: 'apiScope',
+				type: 'options',
+				noDataExpression: true,
+				options: [
+					{
+						name: 'Intern',
+						value: 'intern',
+					},
+					{
+						name: 'Preview',
+						value: 'preview',
+					},
+				],
+				default: 'intern',
+			},
+			{
 				displayName: 'Resource',
 				name: 'resource',
 				type: 'options',
 				noDataExpression: true,
+				displayOptions: {
+					show: {
+						apiScope: ['intern'],
+					},
+				},
 				options: [
 					{
 						name: 'Account',
@@ -184,6 +206,24 @@ export class Smapone implements INodeType {
 				],
 				default: 'account',
 			},
+			{
+				displayName: 'Resource',
+				name: 'resource',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						apiScope: ['preview'],
+					},
+				},
+				options: [
+					{
+						name: 'Preview Example',
+						value: 'previewExample',
+					},
+				],
+				default: 'previewExample',
+			},
 
 			...accountDescription,
 			...bricksDescription,
@@ -210,6 +250,7 @@ export class Smapone implements INodeType {
 			...usersDescription,
 			...usersTokensDescription,
 		],
+		
 	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {

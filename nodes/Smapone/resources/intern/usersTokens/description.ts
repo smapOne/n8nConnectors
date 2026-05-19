@@ -8,6 +8,7 @@ export const usersTokensDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['usersTokens'],
 			},
 		},
@@ -39,6 +40,7 @@ export const usersTokensDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['usersTokens'],
 			},
 		},
@@ -53,6 +55,7 @@ export const usersTokensDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['usersTokens'],
 				operation: ['generateQrCodeForGivenSmap'],
 			},

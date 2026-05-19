@@ -8,6 +8,7 @@ export const exportTemplateDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['exportTemplate'],
 			},
 		},
@@ -39,6 +40,7 @@ export const exportTemplateDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['exportTemplate'],
 				operation: ['uploadMasterExportTemplateForSubscription'],
 			},

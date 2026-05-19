@@ -8,6 +8,7 @@ export const smapsVersionsDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsVersions'],
 			},
 		},
@@ -54,6 +55,7 @@ export const smapsVersionsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsVersions'],
 			},
 		},
@@ -68,6 +70,7 @@ export const smapsVersionsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsVersions'],
 				operation: [
 					'deleteCertainVersionOfSmap',
@@ -87,6 +90,7 @@ export const smapsVersionsDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsVersions'],
 				operation: [
 					'publishSmap',

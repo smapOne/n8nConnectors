@@ -8,6 +8,7 @@ export const bricksDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['bricks'],
 			},
 		},

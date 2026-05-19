@@ -8,6 +8,7 @@ export const smapsTasksDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsTasks'],
 			},
 		},
@@ -29,6 +30,7 @@ export const smapsTasksDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsTasks'],
 			},
 		},
@@ -43,6 +45,7 @@ export const smapsTasksDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsTasks'],
 			},
 		},
@@ -57,6 +60,7 @@ export const smapsTasksDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsTasks'],
 			},
 		},
@@ -71,6 +75,7 @@ export const smapsTasksDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsTasks'],
 				operation: ['changeStateOfTaskAndAssignTaskToUser'],
 			},

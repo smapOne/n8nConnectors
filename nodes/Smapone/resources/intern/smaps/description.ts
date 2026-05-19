@@ -6,7 +6,12 @@ export const smapsDescription: INodeProperties[] = [
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
-		displayOptions: { show: { resource: ['smaps'] } },
+		displayOptions: { 
+			show: { 
+				apiScope: ['intern'],
+				resource: ['smaps'] 
+			} 
+		},
 		options: [
 			{ name: 'Create Empty App or Create by Template', value: 'createEmptyAppOrCreateByTemplate', action: 'Create an empty app or create by a template' },
 			{ name: 'Delete Existing External Access Links for Requested Smap', value: 'deleteExistingExternalAccessLinksForRequestedSmap', action: 'Delete the existing external access links for requested smap' },
@@ -37,6 +42,7 @@ export const smapsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smaps'],
 				operation: [
 					'deleteExistingExternalAccessLinksForRequestedSmap',
@@ -65,6 +71,7 @@ export const smapsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smaps'],
 				operation: ['enableSpecifiedFeatureForSmap', 'disableSpecifiedFeatureForSmap'],
 			},
@@ -78,6 +85,7 @@ export const smapsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smaps'],
 				operation: ['getAssetForSmap'],
 			},
@@ -91,6 +99,7 @@ export const smapsDescription: INodeProperties[] = [
 		default: 'en',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smaps'],
 				operation: ['setExternalDataAccessDefaultLanguageValueForSmap'],
 			},
@@ -104,6 +113,7 @@ export const smapsDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smaps'],
 				operation: [
 					'createEmptyAppOrCreateByTemplate',

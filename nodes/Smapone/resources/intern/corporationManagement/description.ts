@@ -8,6 +8,7 @@ export const corporationManagementDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['corporationManagement'],
 			},
 		},
@@ -59,6 +60,7 @@ export const corporationManagementDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['corporationManagement'],
 				operation: ['getCompanyDetailsById', 'updateExistingCompany'],
 			},
@@ -73,6 +75,7 @@ export const corporationManagementDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['corporationManagement'],
 				operation: ['createNewInvitationForCompanyOwner'],
 			},
@@ -87,6 +90,7 @@ export const corporationManagementDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['corporationManagement'],
 				operation: [
 					'createNewCompany',

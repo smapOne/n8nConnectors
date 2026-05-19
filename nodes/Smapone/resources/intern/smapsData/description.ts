@@ -8,6 +8,7 @@ export const smapsDataDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsData'],
 			},
 		},
@@ -109,6 +110,7 @@ export const smapsDataDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsData'],
 			},
 		},
@@ -123,6 +125,7 @@ export const smapsDataDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsData'],
 				operation: [
 					'createTaskForGivenVersion',
@@ -150,6 +153,7 @@ export const smapsDataDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsData'],
 				operation: [
 					'loadAllDataRecordsForGivenMajorVersion',
@@ -168,6 +172,7 @@ export const smapsDataDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsData'],
 				operation: [
 					'deleteSingleDataRecord',
@@ -189,6 +194,7 @@ export const smapsDataDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsData'],
 				operation: ['loadFileForSpecificDataRecord'],
 			},
@@ -204,6 +210,7 @@ export const smapsDataDescription: INodeProperties[] = [
 		default: 'json',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsData'],
 				operation: [
 					'fillTemplateWithDummyData',
@@ -226,6 +233,7 @@ export const smapsDataDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsData'],
 				operation: ['createTaskForGivenVersion'],
 			},

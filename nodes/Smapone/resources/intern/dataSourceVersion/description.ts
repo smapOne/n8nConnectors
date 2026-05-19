@@ -8,6 +8,7 @@ export const dataSourceVersionDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['dataSourceVersion'],
 			},
 		},
@@ -44,6 +45,7 @@ export const dataSourceVersionDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['dataSourceVersion'],
 			},
 		},
@@ -58,6 +60,7 @@ export const dataSourceVersionDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['dataSourceVersion'],
 				operation: ['retrieveSpecificVersionOfDataSource'],
 			},
@@ -73,6 +76,7 @@ export const dataSourceVersionDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['dataSourceVersion'],
 				operation: ['retrieveLatestMinorVersionOfMajorVersionWithDefinitionAndDataRows'],
 			},
@@ -88,6 +92,7 @@ export const dataSourceVersionDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['dataSourceVersion'],
 				operation: ['updateStaticTableInStructureAndData'],
 			},

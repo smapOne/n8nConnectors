@@ -8,6 +8,7 @@ export const smapsDefinitionDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsDefinition'],
 			},
 		},
@@ -44,6 +45,7 @@ export const smapsDefinitionDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsDefinition'],
 			},
 		},
@@ -58,6 +60,7 @@ export const smapsDefinitionDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsDefinition'],
 				operation: ['getTemplateForSmap', 'loadDefinitionForSmap'],
 			},
@@ -73,6 +76,7 @@ export const smapsDefinitionDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['smapsDefinition'],
 				operation: [
 					'overwriteDefinitionOfGivenSmap',

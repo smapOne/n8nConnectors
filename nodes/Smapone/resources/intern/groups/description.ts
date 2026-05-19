@@ -8,6 +8,7 @@ export const groupsDescription: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['groups'],
 			},
 		},
@@ -74,6 +75,7 @@ export const groupsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['groups'],
 				operation: [
 					'getDetailsOfGroupWithMembers',
@@ -98,6 +100,7 @@ export const groupsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['groups'],
 				operation: [
 					'addUserToGroup',
@@ -116,6 +119,7 @@ export const groupsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['groups'],
 				operation: ['addSmapToGroup', 'deleteSmapFromGroup'],
 			},
@@ -131,6 +135,7 @@ export const groupsDescription: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['groups'],
 				operation: ['editGroupComment'],
 			},
@@ -146,6 +151,7 @@ export const groupsDescription: INodeProperties[] = [
 		default: '{}',
 		displayOptions: {
 			show: {
+				apiScope: ['intern'],
 				resource: ['groups'],
 				operation: ['createEmptyGroup', 'editGroup'],
 			},
