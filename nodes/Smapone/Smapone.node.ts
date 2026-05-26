@@ -56,6 +56,12 @@ import { usersDescription } from './resources/intern/users/description';
 import { executeUsers } from './resources/intern/users/execute';
 import { usersTokensDescription } from './resources/intern/usersTokens/description';
 import { executeUsersTokens } from './resources/intern/usersTokens/execute';
+import { previewSmapsDescription } from './resources/preview/smaps/description';
+import { executePreviewSmaps } from './resources/preview/smaps/execute';
+import { previewSmapsRecordsDescription } from './resources/preview/smapsRecords/description';
+import { executePreviewSmapsRecords } from './resources/preview/smapsRecords/execute';
+import { executePreviewSmapsTasks } from './resources/preview/smapsTasks/execute';
+import { previewSmapsTasksDescription } from './resources/preview/smapsTasks/description';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -218,13 +224,22 @@ export class Smapone implements INodeType {
 				},
 				options: [
 					{
-						name: 'Preview Example',
-						value: 'previewExample',
+						name: '[Preview] Smaps',
+						value: 'previewSmaps',
+					},
+					{
+						name: '[Preview] SmapsRecords',
+						value: 'previewSmapsRecords',
+					},
+					{
+						name: '[Preview] SmapsTasks',
+						value: 'previewSmapsTasks',
 					},
 				],
-				default: 'previewExample',
+				default: 'previewSmaps',
 			},
 
+			//intern
 			...accountDescription,
 			...bricksDescription,
 			...bricksDefinitionDescription,
@@ -249,290 +264,327 @@ export class Smapone implements INodeType {
 			...userImportDescription,
 			...usersDescription,
 			...usersTokensDescription,
+
+			//preview
+			...previewSmapsDescription,
+			...previewSmapsRecordsDescription,
+			...previewSmapsTasksDescription,
 		],
 		
 	};
 
-	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-	const items = this.getInputData();
-	const returnData: INodeExecutionData[] = [];
+		async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+		const items = this.getInputData();
+		const returnData: INodeExecutionData[] = [];
 
-	for (let i = 0; i < items.length; i++) {
-		try {
-			const resource = this.getNodeParameter('resource', i) as string;
-			const operation = this.getNodeParameter('operation', i) as string;
+		for (let i = 0; i < items.length; i++) {
+			try {
+				const resource = this.getNodeParameter('resource', i) as string;
+				const operation = this.getNodeParameter('operation', i) as string;
 
-			let responseData;
+				let responseData;
 
-			switch (resource) {
-				case 'account':
-					responseData = await executeAccount.call(
-						this,
-						i,
-						operation,
-					);
+				switch (resource) {
+					//intern
+					case 'account':
+						responseData = await executeAccount.call(
+							this,
+							i,
+							operation,
+						);
+						
+						returnData.push(...responseData);
+						break;
 					
-					returnData.push(...responseData);
-					break;
-				
-				case 'bricks':
-					responseData = await executeBricks.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
-				
-				case 'bricksDefinition':
-					responseData = await executeBricksDefinition.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
-				
-				case 'corporationManagement':
-					responseData = await executeCorporationManagement.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
-				
-				case 'dataSource':
-					responseData = await executeDataSource.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
-				
-				case 'dataSourceDefinition':
-					responseData = await executeDataSourceDefinition.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
+					case 'bricks':
+						responseData = await executeBricks.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+					
+					case 'bricksDefinition':
+						responseData = await executeBricksDefinition.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+					
+					case 'corporationManagement':
+						responseData = await executeCorporationManagement.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+					
+					case 'dataSource':
+						responseData = await executeDataSource.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+					
+					case 'dataSourceDefinition':
+						responseData = await executeDataSourceDefinition.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
 
-				case 'dataSourceVersion':
-					responseData = await executeDataSourceVersion.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
-				
-				case 'exportTemplate':
-					responseData = await executeExportTemplate.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
-				
-				case 'groups':
-					responseData = await executeGroups.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
-				
-				case 'helper':
-					responseData = await executeHelper.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
-				
-				case 'scenarios':
-					responseData = await executeScenarios.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
-				
-				case 'smaps':
-					responseData = await executeSmaps.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
-				
-				case 'smapsData':
-					responseData = await executeSmapsData.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
+					case 'dataSourceVersion':
+						responseData = await executeDataSourceVersion.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+					
+					case 'exportTemplate':
+						responseData = await executeExportTemplate.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+					
+					case 'groups':
+						responseData = await executeGroups.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+					
+					case 'helper':
+						responseData = await executeHelper.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+					
+					case 'scenarios':
+						responseData = await executeScenarios.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+					
+					case 'smaps':
+						responseData = await executeSmaps.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+					
+					case 'smapsData':
+						responseData = await executeSmapsData.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
 
-				case 'smapsDefinition':
-					responseData = await executeSmapsDefinition.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
+					case 'smapsDefinition':
+						responseData = await executeSmapsDefinition.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
 
-				case 'smapsNotification':
-					responseData = await executeSmapsNotification.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
+					case 'smapsNotification':
+						responseData = await executeSmapsNotification.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
 
-				case 'smapsTasks':
-					responseData = await executeSmapsTasks.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
+					case 'smapsTasks':
+						responseData = await executeSmapsTasks.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
 
-				case 'smapsTokens':
-					responseData = await executeSmapsTokens.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
+					case 'smapsTokens':
+						responseData = await executeSmapsTokens.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
 
-				case 'smapsVersions':
-					responseData = await executeSmapsVersions.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
+					case 'smapsVersions':
+						responseData = await executeSmapsVersions.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
 
-				case 'subscriptions':
-					responseData = await executeSubscriptions.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
+					case 'subscriptions':
+						responseData = await executeSubscriptions.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
 
-				case 'subscriptionsTokens':
-					responseData = await executeSubscriptionsTokens.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
+					case 'subscriptionsTokens':
+						responseData = await executeSubscriptionsTokens.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
 
-				case 'templates':
-					responseData = await executeTemplates.call(
-						this,
-						i,
-						operation,
-					);
+					case 'templates':
+						responseData = await executeTemplates.call(
+							this,
+							i,
+							operation,
+						);
 
-				case 'userImport':
-					responseData = await executeUserImport.call(
-						this,
-						i,
-						operation,
-					);
+					case 'userImport':
+						responseData = await executeUserImport.call(
+							this,
+							i,
+							operation,
+						);
 
-				case 'users':
-					responseData = await executeUsers.call(
-						this,
-						i,
-						operation,
-					);
+					case 'users':
+						responseData = await executeUsers.call(
+							this,
+							i,
+							operation,
+						);
 
-				case 'usersTokens':
-					responseData = await executeUsersTokens.call(
-						this,
-						i,
-						operation,
-					);
-				
-					returnData.push(...responseData);
-					break;
-				
-				default:
-					throw new NodeApiError(this.getNode(), {
-						message: `The resource "${resource}" is not supported.`,
+					case 'usersTokens':
+						responseData = await executeUsersTokens.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+
+					//preview
+					case 'previewSmaps':
+						responseData = await executePreviewSmaps.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+
+					case 'previewSmapsRecords':
+						responseData = await executePreviewSmapsRecords.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+
+					case 'previewSmapsTasks':
+						responseData = await executePreviewSmapsTasks.call(
+							this,
+							i,
+							operation,
+						);
+					
+						returnData.push(...responseData);
+						break;
+					
+					default:
+						throw new NodeApiError(this.getNode(), {
+							message: `The resource "${resource}" is not supported.`,
+						});
+				}
+
+				if (responseData === undefined) {
+					throw new NodeApiError(this.getNode(), {message: 'The operation "${operation}" is not supported for resource "${resource}".'});
+				}
+
+				const executionData = this.helpers.constructExecutionMetaData(
+					this.helpers.returnJsonArray(responseData),
+					{
+						itemData: {
+							item: i,
+						},
+					},
+				);
+
+				returnData.push(...executionData);
+			} catch (error) {
+				if (this.continueOnFail()) {
+					returnData.push({
+						json: {
+							error: error instanceof Error ? error.message : String(error),
+						},
+						pairedItem: {
+							item: i,
+						},
 					});
+					continue;
+				}
+
+				throw new NodeApiError(this.getNode(), error as JsonObject);
 			}
-
-			if (responseData === undefined) {
-				throw new NodeApiError(this.getNode(), {message: 'The operation "${operation}" is not supported for resource "${resource}".'});
-			}
-
-			const executionData = this.helpers.constructExecutionMetaData(
-				this.helpers.returnJsonArray(responseData),
-				{
-					itemData: {
-						item: i,
-					},
-				},
-			);
-
-			returnData.push(...executionData);
-		} catch (error) {
-			if (this.continueOnFail()) {
-				returnData.push({
-					json: {
-						error: error instanceof Error ? error.message : String(error),
-					},
-					pairedItem: {
-						item: i,
-					},
-				});
-				continue;
-			}
-
-			throw new NodeApiError(this.getNode(), error as JsonObject);
 		}
-	}
 
-	return [returnData];
-}
+		return [returnData];
+	}
 }
