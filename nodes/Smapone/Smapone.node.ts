@@ -62,6 +62,8 @@ import { previewSmapsRecordsDescription } from './resources/preview/smapsRecords
 import { executePreviewSmapsRecords } from './resources/preview/smapsRecords/execute';
 import { executePreviewSmapsTasks } from './resources/preview/smapsTasks/execute';
 import { previewSmapsTasksDescription } from './resources/preview/smapsTasks/description';
+import { externalScimDescription } from './resources/external/scim/description';
+import { executeExternalScim } from './resources/external/scim/execute';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -98,6 +100,10 @@ export class Smapone implements INodeType {
 					{
 						name: 'Preview',
 						value: 'preview',
+					},
+					{
+						name: 'External',
+						value: 'external',
 					},
 				],
 				default: 'intern',
@@ -238,6 +244,24 @@ export class Smapone implements INodeType {
 				],
 				default: 'previewSmaps',
 			},
+			{
+				displayName: 'Resource',
+				name: 'resource',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						apiScope: ['external'],
+					},
+				},
+				options: [
+					{
+						name: '[External] SCIM',
+						value: 'externalScim',
+					},
+				],
+				default: 'externalScim',
+			},
 
 			//intern
 			...accountDescription,
@@ -269,6 +293,9 @@ export class Smapone implements INodeType {
 			...previewSmapsDescription,
 			...previewSmapsRecordsDescription,
 			...previewSmapsTasksDescription,
+
+			//external
+			...externalScimDescription,
 		],
 		
 	};
@@ -547,7 +574,19 @@ export class Smapone implements INodeType {
 					
 						returnData.push(...responseData);
 						break;
+
+
+					//external
+					case 'externalScim':
+						responseData = await executeExternalScim.call(
+							this,
+							i,
+							operation,
+						);
 					
+						returnData.push(...responseData);
+						break;
+
 					default:
 						throw new NodeApiError(this.getNode(), {
 							message: `The resource "${resource}" is not supported.`,
