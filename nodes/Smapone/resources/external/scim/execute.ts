@@ -17,16 +17,36 @@ export async function executeExternalScim(
 	switch (operation) {
 		case 'getGroupListByFilter': {
 			const filter = this.getNodeParameter('filter', i) as string;
+			const attributes = this.getNodeParameter('attributes', i) as string;
+			const sortBy = this.getNodeParameter('sortBy', i) as string;
+			const sortOrder = this.getNodeParameter('sortOrder', i) as string;
+			const startIndex = this.getNodeParameter('startIndex', i) as number;
+			const count = this.getNodeParameter('count', i) as number;
 			const qs: IDataObject = {};
 
 			if (filter) {
 				qs.filter = filter;
 			}
+			if (attributes) {
+				qs.attributes = attributes;
+			}
+			if (sortBy) {
+				qs.sortBy = sortBy;
+			}
+			if (sortOrder) {
+				qs.sortOrder = sortOrder;
+			}
+			if (startIndex) {
+				qs.startIndex = startIndex;
+			}
+			if (count) {
+				qs.count = count;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
 				'GET',
-				'/SCIM/Groups',
+				'/external/SCIM/Groups',
 				{},
 				qs,
 			);
@@ -39,7 +59,7 @@ export async function executeExternalScim(
 			responseData = await smaponeApiRequest.call(
 				this,
 				'POST',
-				'/SCIM/Groups',
+				'/external/SCIM/Groups',
 				body,
 			);
 			break;
@@ -51,7 +71,7 @@ export async function executeExternalScim(
 			responseData = await smaponeApiRequest.call(
 				this,
 				'GET',
-				`/SCIM/Groups/${encodeURIComponent(id)}`,
+				`/external/SCIM/Groups/${encodeURIComponent(id)}`,
 			);
 			break;
 		}
@@ -62,7 +82,7 @@ export async function executeExternalScim(
 			responseData = await smaponeApiRequest.call(
 				this,
 				'DELETE',
-				`/SCIM/Groups/${encodeURIComponent(id)}`,
+				`/external/SCIM/Groups/${encodeURIComponent(id)}`,
 			);
 			break;
 		}
@@ -74,24 +94,44 @@ export async function executeExternalScim(
 			responseData = await smaponeApiRequest.call(
 				this,
 				'PATCH',
-				`/SCIM/Groups/${encodeURIComponent(id)}`,
+				`/external/SCIM/Groups/${encodeURIComponent(id)}`,
 				body,
 			);
 			break;
 		}
 
 		case 'getUserListByFilter': {
-			const filter = this.getNodeParameter('filter', i) as string;
+						const filter = this.getNodeParameter('filter', i) as string;
+			const attributes = this.getNodeParameter('attributes', i) as string;
+			const sortBy = this.getNodeParameter('sortBy', i) as string;
+			const sortOrder = this.getNodeParameter('sortOrder', i) as string;
+			const startIndex = this.getNodeParameter('startIndex', i) as number;
+			const count = this.getNodeParameter('count', i) as number;
 			const qs: IDataObject = {};
 
 			if (filter) {
 				qs.filter = filter;
 			}
+			if (attributes) {
+				qs.attributes = attributes;
+			}
+			if (sortBy) {
+				qs.sortBy = sortBy;
+			}
+			if (sortOrder) {
+				qs.sortOrder = sortOrder;
+			}
+			if (startIndex) {
+				qs.startIndex = startIndex;
+			}
+			if (count) {
+				qs.count = count;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
 				'GET',
-				'/SCIM/Users',
+				'/external/SCIM/Users',
 				{},
 				qs,
 			);
@@ -104,7 +144,7 @@ export async function executeExternalScim(
 			responseData = await smaponeApiRequest.call(
 				this,
 				'POST',
-				'/SCIM/Users',
+				'/external/SCIM/Users',
 				body,
 			);
 			break;
@@ -116,7 +156,7 @@ export async function executeExternalScim(
 			responseData = await smaponeApiRequest.call(
 				this,
 				'GET',
-				`/SCIM/Users/${encodeURIComponent(id)}`,
+				`/external/SCIM/Users/${encodeURIComponent(id)}`,
 			);
 			break;
 		}
@@ -127,7 +167,7 @@ export async function executeExternalScim(
 			responseData = await smaponeApiRequest.call(
 				this,
 				'DELETE',
-				`/SCIM/Users/${encodeURIComponent(id)}`,
+				`/external/SCIM/Users/${encodeURIComponent(id)}`,
 			);
 			break;
 		}
@@ -139,7 +179,7 @@ export async function executeExternalScim(
 			responseData = await smaponeApiRequest.call(
 				this,
 				'PATCH',
-				`/SCIM/Users/${encodeURIComponent(id)}`,
+				`/external/SCIM/Users/${encodeURIComponent(id)}`,
 				body,
 			);
 			break;

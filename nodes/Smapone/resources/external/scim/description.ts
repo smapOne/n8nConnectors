@@ -89,7 +89,7 @@ export const externalScimDescription: INodeProperties[] = [
 		},
 		description: 'Identifier of the SCIM group or user',
 	},
-
+	
 	{
 		displayName: 'Filter',
 		name: 'filter',
@@ -103,6 +103,81 @@ export const externalScimDescription: INodeProperties[] = [
 			},
 		},
 		description: 'SCIM filter expression',
+	},
+
+	{
+		displayName: 'Attributes',
+		name: 'attributes',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				apiScope: ['external'],
+				resource: ['externalScim'],
+				operation: ['getGroupListByFilter', 'getUserListByFilter'],
+			},
+		},
+		description: 'SCIM filter attributes',
+	},
+
+	{
+		displayName: 'SortBy',
+		name: 'sortBy',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				apiScope: ['external'],
+				resource: ['externalScim'],
+				operation: ['getGroupListByFilter', 'getUserListByFilter'],
+			},
+		},
+		description: 'SCIM sorting parameter',
+	},
+
+	{
+		displayName: 'SortOrder',
+		name: 'sortOrder',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				apiScope: ['external'],
+				resource: ['externalScim'],
+				operation: ['getGroupListByFilter', 'getUserListByFilter'],
+			},
+		},
+		description: 'SCIM sort order parameter',
+	},
+
+	{
+		displayName: 'StartIndex',
+		name: 'startIndex',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				apiScope: ['external'],
+				resource: ['externalScim'],
+				operation: ['getGroupListByFilter', 'getUserListByFilter'],
+			},
+		},
+		description: 'SCIM number of start item expression',
+	},
+
+	{
+		displayName: 'Count',
+		name: 'count',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				apiScope: ['external'],
+				resource: ['externalScim'],
+				operation: ['getGroupListByFilter', 'getUserListByFilter'],
+			},
+		},
+		description: 'SCIM count of selected items',
 	},
 
 	{

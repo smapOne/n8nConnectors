@@ -9,8 +9,11 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Operations
 
-_List the operations supported by your node._
-* TODO
+The Connector contains all Endpoints for the following API routes:
+* [smapOne API - internal scope](https://platform.smapone.com/swagger/index.html?urls.primaryName=intern)
+* [smapOne API - external scope](https://platform.smapone.com/swagger/index.html?urls.primaryName=external)
+* [smapOne API - preview scope](https://platform.smapone.com/swagger/index.html?urls.primaryName=preview)
+
 
 ## Credentials
 
