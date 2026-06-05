@@ -1,4 +1,4 @@
-import {
+/*import {
 	NodeApiError,
 	type IDataObject,
 	type IExecuteFunctions,
@@ -50,4 +50,4 @@ export async function executeExportTemplate(
 	}
 
 	return this.helpers.returnJsonArray(responseData);
-}
+}*/

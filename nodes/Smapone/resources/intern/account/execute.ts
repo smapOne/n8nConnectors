@@ -17,7 +17,7 @@ export async function executeAccount(
 
 	switch (operation) {
 
-		case 'get':
+		case 'getAccount':
 			responseData = await smaponeApiRequest.call(
 				this,
 				'GET',

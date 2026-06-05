@@ -79,7 +79,11 @@ export async function executeSmapsVersions(
 
 		case 'updateAllDataSourcesToLatestMinorVersion': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
-			const body = this.getNodeParameter('body', i) as IDataObject;
+			const updateEditVersion = this.getNodeParameter('updateEditVersion', i) as boolean;
+
+			const qs: IDataObject = {
+				updateEditVersion
+			};
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -87,7 +91,8 @@ export async function executeSmapsVersions(
 				`/intern/Smaps/${encodeURIComponent(
 					smapId,
 				)}/Versions/Current/DataSources/Update`,
-				body,
+				{},
+				qs
 			);
 			break;
 		}

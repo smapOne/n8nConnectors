@@ -79,11 +79,11 @@ export const dataSourceDescription: INodeProperties[] = [
 	},
 
 	{
-		displayName: 'Title',
+		displayName: 'New Title',
 		name: 'title',
 		type: 'string',
 		required: true,
-		default: '',
+		default: '{}',
 		displayOptions: {
 			show: {
 				apiScope: ['intern'],
@@ -91,6 +91,6 @@ export const dataSourceDescription: INodeProperties[] = [
 				operation: ['updateTitleOfDataSource'],
 			},
 		},
-		description: 'New title of the data source',
+		description: 'New Datasource Title sent to the API',
 	},
 ];

@@ -1,4 +1,4 @@
-import {
+/*import {
 	NodeApiError,
 	type IDataObject,
 	type IExecuteFunctions,
@@ -41,7 +41,7 @@ export async function executeCorporationManagement(
 		}
 
 		case 'getCompanyDetailsById': {
-			const companyId = this.getNodeParameter('companyId', i) as string;
+			const companyId = this.getNodeParameter('id', i) as string;
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -76,13 +76,13 @@ export async function executeCorporationManagement(
 			break;
 
 		case 'updateExistingCompany': {
-			const companyId = this.getNodeParameter('companyId', i) as string;
+			const id = this.getNodeParameter('id', i) as string;
 			const body = this.getNodeParameter('body', i) as IDataObject;
 
 			responseData = await smaponeApiRequest.call(
 				this,
 				'PUT',
-				`/intern/CorporationManagement/Company/${encodeURIComponent(companyId)}`,
+				`/intern/CorporationManagement/Company/${encodeURIComponent(id)}`,
 				body,
 			);
 			break;
@@ -95,4 +95,4 @@ export async function executeCorporationManagement(
 	}
 
 	return this.helpers.returnJsonArray(responseData);
-}
+}*/

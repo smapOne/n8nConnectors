@@ -17,41 +17,97 @@ export async function executeSmapsData(
 	switch (operation) {
 		case 'loadAllDataRecordsForAllVersions': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
+			const markAsExported = this.getNodeParameter('markAsExported', i) as boolean;
+			const format = this.getNodeParameter('format', i) as string;
+			const state = this.getNodeParameter('state', i) as string;
+
+			const qs: IDataObject = {
+				markAsExported,
+			};
+
+			if (format) {
+				qs.format = format;
+			}
+
+			if (state) {
+				qs.state = state;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
 				'GET',
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Data`,
+				{},
+				qs,
 			);
 			break;
 		}
 
 		case 'loadAllDataRecordsForAllVersionsAsFormat': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
+			const markAsExported = this.getNodeParameter('markAsExported', i) as boolean;
 			const format = this.getNodeParameter('format', i) as string;
+			const state = this.getNodeParameter('state', i) as string;
+
+			const qs: IDataObject = {
+				markAsExported,
+			};
+
+			if (state) {
+				qs.state = state;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
 				'GET',
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Data.${encodeURIComponent(format)}`,
+				{},
+				qs
 			);
 			break;
 		}
 
 		case 'loadAllDataRecordsForCurrentPublishedVersion': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
+			const markAsExported = this.getNodeParameter('markAsExported', i) as boolean;
+			const format = this.getNodeParameter('format', i) as string;
+			const state = this.getNodeParameter('state', i) as string;
+
+			const qs: IDataObject = {
+				markAsExported,
+			};
+
+			if (format) {
+				qs.format = format;
+			}
+
+			if (state) {
+				qs.state = state;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
 				'GET',
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Versions/Current/Data`,
+				{},
+				qs
 			);
 			break;
 		}
 
 		case 'loadAllDataRecordsForCurrentPublishedVersionAsFormat': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
+			const markAsExported = this.getNodeParameter('markAsExported', i) as boolean;
 			const format = this.getNodeParameter('format', i) as string;
+			const state = this.getNodeParameter('state', i) as string;
+
+			const qs: IDataObject = {
+				markAsExported,
+			};
+
+			if (state) {
+				qs.state = state;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -66,6 +122,21 @@ export async function executeSmapsData(
 		case 'loadAllDataRecordsForGivenVersion': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
 			const version = this.getNodeParameter('version', i) as string;
+			const markAsExported = this.getNodeParameter('markAsExported', i) as boolean;
+			const format = this.getNodeParameter('format', i) as string;
+			const state = this.getNodeParameter('state', i) as string;
+
+			const qs: IDataObject = {
+				markAsExported,
+			};
+
+			if (format) {
+				qs.format = format;
+			}
+
+			if (state) {
+				qs.state = state;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -73,6 +144,8 @@ export async function executeSmapsData(
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Versions/${encodeURIComponent(
 					version,
 				)}/Data`,
+				{},
+				qs
 			);
 			break;
 		}
@@ -96,6 +169,13 @@ export async function executeSmapsData(
 		case 'deleteRecordsOfVersion': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
 			const version = this.getNodeParameter('version', i) as string;
+			const state = this.getNodeParameter('state', i) as string;
+
+			const qs: IDataObject = {};
+
+			if (state) {
+				qs.state = state;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -103,6 +183,8 @@ export async function executeSmapsData(
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Versions/${encodeURIComponent(
 					version,
 				)}/Data`,
+				{},
+				qs
 			);
 			break;
 		}
@@ -110,7 +192,17 @@ export async function executeSmapsData(
 		case 'loadAllDataRecordsForGivenVersionAsFormat': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
 			const version = this.getNodeParameter('version', i) as string;
+			const markAsExported = this.getNodeParameter('markAsExported', i) as boolean;
 			const format = this.getNodeParameter('format', i) as string;
+			const state = this.getNodeParameter('state', i) as string;
+
+			const qs: IDataObject = {
+				markAsExported,
+			};
+
+			if (state) {
+				qs.state = state;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -118,6 +210,8 @@ export async function executeSmapsData(
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Versions/${encodeURIComponent(
 					version,
 				)}/Data.${encodeURIComponent(format)}`,
+				{},
+				qs
 			);
 			break;
 		}
@@ -125,6 +219,21 @@ export async function executeSmapsData(
 		case 'loadAllDataRecordsForGivenMajorVersion': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
 			const majorVersion = this.getNodeParameter('majorVersion', i) as string;
+			const markAsExported = this.getNodeParameter('markAsExported', i) as boolean;
+			const format = this.getNodeParameter('format', i) as string;
+			const state = this.getNodeParameter('state', i) as string;
+
+			const qs: IDataObject = {
+				markAsExported,
+			};
+
+			if (format) {
+				qs.format = format;
+			}
+
+			if (state) {
+				qs.state = state;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -132,6 +241,8 @@ export async function executeSmapsData(
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Versions/${encodeURIComponent(
 					majorVersion,
 				)}/Data`,
+				{},
+				qs
 			);
 			break;
 		}
@@ -139,7 +250,17 @@ export async function executeSmapsData(
 		case 'loadAllDataRecordsForGivenMajorVersionAsFormat': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
 			const majorVersion = this.getNodeParameter('majorVersion', i) as string;
+			const markAsExported = this.getNodeParameter('markAsExported', i) as boolean;
 			const format = this.getNodeParameter('format', i) as string;
+			const state = this.getNodeParameter('state', i) as string;
+
+			const qs: IDataObject = {
+				markAsExported,
+			};
+
+			if (state) {
+				qs.state = state;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -147,6 +268,8 @@ export async function executeSmapsData(
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Versions/${encodeURIComponent(
 					majorVersion,
 				)}/Data.${encodeURIComponent(format)}`,
+				{},
+				qs
 			);
 			break;
 		}
@@ -156,6 +279,16 @@ export async function executeSmapsData(
 			const version = this.getNodeParameter('version', i) as string;
 			const recordId = this.getNodeParameter('recordId', i) as string;
 			const format = this.getNodeParameter('format', i) as string;
+			const markAsExported = this.getNodeParameter('markAsExported', i) as boolean;
+			const useDefault = this.getNodeParameter('useDefault', i) as boolean;
+
+			const qs: IDataObject = {
+				markAsExported,
+			};
+
+			if (useDefault) {
+				qs.useDefault = useDefault;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -163,6 +296,8 @@ export async function executeSmapsData(
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Versions/${encodeURIComponent(
 					version,
 				)}/Data/${encodeURIComponent(recordId)}.${encodeURIComponent(format)}`,
+				{},
+				qs
 			);
 			break;
 		}
@@ -171,6 +306,21 @@ export async function executeSmapsData(
 			const smapId = this.getNodeParameter('smapId', i) as string;
 			const version = this.getNodeParameter('version', i) as string;
 			const recordId = this.getNodeParameter('recordId', i) as string;
+			const format = this.getNodeParameter('format', i) as string;
+			const markAsExported = this.getNodeParameter('markAsExported', i) as boolean;
+			const useDefault = this.getNodeParameter('useDefault', i) as boolean;
+
+			const qs: IDataObject = {
+				markAsExported,
+			};
+
+			if (format) {
+				qs.format = format;
+			}
+
+			if (useDefault) {
+				qs.useDefault = useDefault;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -178,6 +328,8 @@ export async function executeSmapsData(
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Versions/${encodeURIComponent(
 					version,
 				)}/Data/${encodeURIComponent(recordId)}`,
+				{},
+				qs
 			);
 			break;
 		}
@@ -232,13 +384,29 @@ export async function executeSmapsData(
 			const smapId = this.getNodeParameter('smapId', i) as string;
 			const version = this.getNodeParameter('version', i) as string;
 			const format = this.getNodeParameter('format', i) as string;
+			const generateRandomValues = this.getNodeParameter('generateRandomValues', i) as boolean;
+			const useDefault = this.getNodeParameter('useDefault', i) as boolean;
+			const fileNamePattern = this.getNodeParameter('fileNamePattern', i) as string;
+			const inline = this.getNodeParameter('inline', i) as boolean;
 
+			const qs: IDataObject = {
+				generateRandomValues,
+				useDefault,
+				inline
+			};
+
+			if (fileNamePattern) {
+				qs.fileNamePattern = fileNamePattern;
+			}
+			
 			responseData = await smaponeApiRequest.call(
 				this,
 				'GET',
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Versions/${encodeURIComponent(
 					version,
 				)}/Data/Preview.${encodeURIComponent(format)}`,
+				{},
+				qs
 			);
 			break;
 		}
@@ -246,6 +414,11 @@ export async function executeSmapsData(
 		case 'generateDummyRecord': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
 			const version = this.getNodeParameter('version', i) as string;
+			const generateRandomValues = this.getNodeParameter('generateRandomValues', i) as boolean;
+
+			const qs: IDataObject = {
+				generateRandomValues,
+			};
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -253,6 +426,8 @@ export async function executeSmapsData(
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Versions/${encodeURIComponent(
 					version,
 				)}/Data/Preview`,
+				{},
+				qs
 			);
 			break;
 		}

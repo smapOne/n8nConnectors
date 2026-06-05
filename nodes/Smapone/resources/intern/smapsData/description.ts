@@ -165,6 +165,131 @@ export const smapsDataDescription: INodeProperties[] = [
 	},
 
 	{
+		displayName: 'Mark as exported',
+		name: 'markAsExported',
+		type: 'boolean',
+		required: false,
+		default: false,
+		displayOptions: {
+			show: {
+				apiScope: ['intern'],
+				resource: ['smapsData'],
+				operation: [
+					'loadAllDataRecordsForAllVersions',
+					'loadAllDataRecordsForAllVersionsAsFormat',
+					'loadAllDataRecordsForCurrentPublishedVersion',
+					'loadAllDataRecordsForCurrentPublishedVersionAsFormat',
+					'loadAllDataRecordsForGivenVersion',
+					'loadAllDataRecordsForGivenVersionAsFormat',
+					'loadAllDataRecordsForGivenMajorVersion',
+					'loadAllDataRecordsForGivenMajorVersionAsFormat',
+					'loadSingleDataRecord',
+					'loadSingleDataRecordAsFormat',
+				],
+			},
+		},
+		description: 'Mark read records as exported',
+	},
+
+	{
+		displayName: 'Generate random values',
+		name: 'generateRandomValues',
+		type: 'boolean',
+		required: false,
+		default: false,
+		displayOptions: {
+			show: {
+				apiScope: ['intern'],
+				resource: ['smapsData'],
+				operation: [
+					'generateDummyRecord',
+				],
+			},
+		},
+		description: 'true if the generated record should contain random data or false to create static data based on the definition',
+	},
+
+	{
+		displayName: 'Output format',
+		name: 'format',
+		type: 'options',
+		options: [
+			{
+				name: 'JSON',
+				value: 'Json',
+			},
+			{
+				name: 'PDF',
+				value: 'Pdf',
+			},
+			{
+				name: 'XML',
+				value: 'Xml',
+			},
+		],
+		default: 'Json',
+		displayOptions: {
+			show: {
+				apiScope: ['intern'],
+				resource: ['smapsData'],
+				operation: [
+					'loadAllDataRecordsForAllVersions',
+					'loadAllDataRecordsForAllVersionsAsFormat',
+					'loadAllDataRecordsForCurrentPublishedVersion',
+					'loadAllDataRecordsForCurrentPublishedVersionAsFormat',
+					'loadAllDataRecordsForGivenVersion',
+					'loadAllDataRecordsForGivenVersionAsFormat',
+					'loadAllDataRecordsForGivenMajorVersion',
+					'loadAllDataRecordsForGivenMajorVersionAsFormat',
+					'loadSingleDataRecord',
+					'loadSingleDataRecordAsFormat',
+					'fillTemplateWithDummyData',
+				],
+			},
+		},
+		description: 'Output Format(.json, .xml or .pdf), Default is Json. Available values : Json, Pdf, Xml',
+	},
+
+	{
+		displayName: 'Record state filter',
+		name: 'state',
+		type: 'options',
+		options: [
+			{
+				name: 'New',
+				value: 'New',
+			},
+			{
+				name: 'Exported',
+				value: 'Exported',
+			},
+			{
+				name: 'Incomplete',
+				value: 'Incomplete',
+			},
+		],
+		default: 'New',
+		displayOptions: {
+			show: {
+				apiScope: ['intern'],
+				resource: ['smapsData'],
+				operation: [
+					'loadAllDataRecordsForAllVersions',
+					'loadAllDataRecordsForAllVersionsAsFormat',
+					'loadAllDataRecordsForCurrentPublishedVersion',
+					'loadAllDataRecordsForCurrentPublishedVersionAsFormat',
+					'loadAllDataRecordsForGivenVersion',
+					'loadAllDataRecordsForGivenVersionAsFormat',
+					'deleteRecordsOfVersion',
+					'loadAllDataRecordsForGivenMajorVersion',
+					'loadAllDataRecordsForGivenMajorVersionAsFormat',
+				],
+			},
+		},
+		description: 'filter the records for state new = 1, exported = 2 or incomplete = 3',
+	},
+
+	{
 		displayName: 'Record ID',
 		name: 'recordId',
 		type: 'string',
@@ -203,26 +328,22 @@ export const smapsDataDescription: INodeProperties[] = [
 	},
 
 	{
-		displayName: 'Format',
-		name: 'format',
-		type: 'string',
-		required: true,
-		default: 'json',
+		displayName: 'Use Default',
+		name: 'useDefault',
+		type: 'boolean',
+		required: false,
+		default: false,
 		displayOptions: {
 			show: {
 				apiScope: ['intern'],
 				resource: ['smapsData'],
 				operation: [
-					'fillTemplateWithDummyData',
-					'loadAllDataRecordsForAllVersionsAsFormat',
-					'loadAllDataRecordsForCurrentPublishedVersionAsFormat',
-					'loadAllDataRecordsForGivenMajorVersionAsFormat',
-					'loadAllDataRecordsForGivenVersionAsFormat',
+					'loadSingleDataRecord',
 					'loadSingleDataRecordAsFormat',
 				],
 			},
 		},
-		description: 'Response format',
+		description: 'If true a new template is generated and the uploaded app template will be ignored.',
 	},
 
 	{

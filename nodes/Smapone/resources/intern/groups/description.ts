@@ -128,22 +128,6 @@ export const groupsDescription: INodeProperties[] = [
 	},
 
 	{
-		displayName: 'Comment',
-		name: 'comment',
-		type: 'string',
-		required: true,
-		default: '',
-		displayOptions: {
-			show: {
-				apiScope: ['intern'],
-				resource: ['groups'],
-				operation: ['editGroupComment'],
-			},
-		},
-		description: 'New comment of the group',
-	},
-
-	{
 		displayName: 'Request Body',
 		name: 'body',
 		type: 'json',
@@ -153,7 +137,7 @@ export const groupsDescription: INodeProperties[] = [
 			show: {
 				apiScope: ['intern'],
 				resource: ['groups'],
-				operation: ['createEmptyGroup', 'editGroup'],
+				operation: ['createEmptyGroup', 'editGroup', 'editGroupComment'],
 			},
 		},
 		description: 'JSON body sent to the API',

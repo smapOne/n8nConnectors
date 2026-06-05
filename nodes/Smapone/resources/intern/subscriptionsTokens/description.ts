@@ -1,4 +1,4 @@
-import type { INodeProperties } from 'n8n-workflow';
+/*import type { INodeProperties } from 'n8n-workflow';
 
 export const subscriptionsTokensDescription: INodeProperties[] = [
 	{
@@ -125,4 +125,4 @@ export const subscriptionsTokensDescription: INodeProperties[] = [
 		},
 		description: 'JSON body sent to the API',
 	},
-];
+];*/

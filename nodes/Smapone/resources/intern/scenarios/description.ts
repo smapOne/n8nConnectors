@@ -37,7 +37,7 @@ export const scenariosDescription: INodeProperties[] = [
 		name: 'language',
 		type: 'string',
 		required: true,
-		default: 'en',
+		default: 'English',
 		displayOptions: {
 			show: {
 				apiScope: ['intern'],

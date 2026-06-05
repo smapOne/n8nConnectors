@@ -1,4 +1,4 @@
-import {
+/*import {
 	NodeApiError,
 	type IDataObject,
 	type IExecuteFunctions,
@@ -116,6 +116,11 @@ export async function executeSmapsTokens(
 			const smapId = this.getNodeParameter('smapId', i) as string;
 			const tokenId = this.getNodeParameter('tokenId', i) as string;
 			const body = this.getNodeParameter('body', i) as IDataObject;
+			const sendToUser = this.getNodeParameter('sendToUser', i) as boolean;
+
+			const qs: IDataObject = {
+				sendToUser,
+			};
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -124,6 +129,7 @@ export async function executeSmapsTokens(
 					tokenId,
 				)}/SendMail`,
 				body,
+				qs
 			);
 			break;
 		}
@@ -131,6 +137,13 @@ export async function executeSmapsTokens(
 		case 'generateQrCodeForGivenSmap': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
 			const tokenId = this.getNodeParameter('tokenId', i) as string;
+			const target = this.getNodeParameter('target', i) as boolean;
+
+			const qs: IDataObject = {};
+
+			if (target) {
+				qs.target = target;
+			}
 
 			responseData = await smaponeApiRequest.call(
 				this,
@@ -138,6 +151,8 @@ export async function executeSmapsTokens(
 				`/intern/Smaps/${encodeURIComponent(smapId)}/Tokens/${encodeURIComponent(
 					tokenId,
 				)}/QrCode`,
+				{},
+				qs
 			);
 			break;
 		}
@@ -149,4 +164,4 @@ export async function executeSmapsTokens(
 	}
 
 	return this.helpers.returnJsonArray(responseData);
-}
+}*/

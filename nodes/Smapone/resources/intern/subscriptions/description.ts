@@ -1,4 +1,4 @@
-import type { INodeProperties } from 'n8n-workflow';
+/*import type { INodeProperties } from 'n8n-workflow';
 
 export const subscriptionsDescription: INodeProperties[] = [
 	{
@@ -148,4 +148,4 @@ export const subscriptionsDescription: INodeProperties[] = [
 		},
 		description: 'ID of the user',
 	},
-];
+];*/

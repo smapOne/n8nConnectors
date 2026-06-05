@@ -1,4 +1,4 @@
-import type { INodeProperties } from 'n8n-workflow';
+/*import type { INodeProperties } from 'n8n-workflow';
 
 export const exportTemplateDescription: INodeProperties[] = [
 	{
@@ -47,4 +47,4 @@ export const exportTemplateDescription: INodeProperties[] = [
 		},
 		description: 'JSON body sent to the API',
 	},
-];
+];*/

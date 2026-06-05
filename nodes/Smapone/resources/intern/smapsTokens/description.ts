@@ -1,4 +1,4 @@
-import type { INodeProperties } from 'n8n-workflow';
+/*import type { INodeProperties } from 'n8n-workflow';
 
 export const smapsTokensDescription: INodeProperties[] = [
 	{
@@ -120,6 +120,22 @@ export const smapsTokensDescription: INodeProperties[] = [
 	},
 
 	{
+		displayName: 'Send to User',
+		name: 'sendToUser',
+		type: 'boolean',
+		required: false,
+		default: false,
+		displayOptions: {
+			show: {
+				apiScope: ['intern'],
+				resource: ['smapsTokens'],
+				operation: ['sendTokenAsEmail'],
+			},
+		},
+		description: 'Needed only for user tokens. Set to true if the token should be mailed to the user directely otherwise the creator get all the emails.',
+	},
+
+	{
 		displayName: 'Request Body',
 		name: 'body',
 		type: 'json',
@@ -138,4 +154,4 @@ export const smapsTokensDescription: INodeProperties[] = [
 		},
 		description: 'JSON body sent to the API',
 	},
-];
+];*/

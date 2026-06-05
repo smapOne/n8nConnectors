@@ -12,7 +12,7 @@ export async function smaponeApiRequest(
 	this: IExecuteFunctions,
 	method: IHttpRequestMethods,
 	endpoint: string,
-	body: IDataObject = {},
+	body: IDataObject | string = {},
 	qs: IDataObject = {},
 ): Promise<IDataObject | IDataObject[]> {
     	const options: IHttpRequestOptions = {
@@ -25,7 +25,7 @@ export async function smaponeApiRequest(
 		json: true,
 	};
 
-	if (Object.keys(body).length) {
+	if (typeof body === 'string' || Object.keys(body).length > 0) {
 		options.body = body;
 	}
 
@@ -34,6 +34,20 @@ export async function smaponeApiRequest(
 	}
 
 	try {
+		/*console.log('================ REQUEST ================');
+		console.log('Method:', method);
+		console.log('URL:', options.url);
+
+		if (options.qs) {
+			console.log('Query:', JSON.stringify(options.qs, null, 2));
+		}
+
+		if (options.body) {
+			console.log('Body:', JSON.stringify(options.body, null, 2));
+		}
+
+		console.log('========================================');*/
+
 		return await this.helpers.httpRequestWithAuthentication.call(
 			this,
 			'smaponeApi',

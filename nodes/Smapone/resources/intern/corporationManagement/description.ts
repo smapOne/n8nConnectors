@@ -1,4 +1,4 @@
-import type { INodeProperties } from 'n8n-workflow';
+/*import type { INodeProperties } from 'n8n-workflow';
 
 export const corporationManagementDescription: INodeProperties[] = [
 	{
@@ -54,7 +54,7 @@ export const corporationManagementDescription: INodeProperties[] = [
 
 	{
 		displayName: 'Company ID',
-		name: 'companyId',
+		name: 'id',
 		type: 'string',
 		required: true,
 		default: '',
@@ -101,4 +101,4 @@ export const corporationManagementDescription: INodeProperties[] = [
 		},
 		description: 'JSON body sent to the API',
 	},
-];
+];*/

@@ -72,13 +72,13 @@ export async function executeGroups(
 
 		case 'editGroupComment': {
 			const groupId = this.getNodeParameter('groupId', i) as string;
-			const comment = this.getNodeParameter('comment', i) as string;
+			const body = this.getNodeParameter('body', i) as string;
 
 			responseData = await smaponeApiRequest.call(
 				this,
 				'PATCH',
 				`/intern/Groups/${encodeURIComponent(groupId)}/comment`,
-				{ comment },
+				{ body },
 			);
 			break;
 		}

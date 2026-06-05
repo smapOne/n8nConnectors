@@ -65,7 +65,7 @@ export async function executeDataSource(
 				this,
 				'PUT',
 				`/intern/DataSource/${encodeURIComponent(dataSourceId)}/title`,
-				{ title },
+				title,
 			);
 			break;
 		}

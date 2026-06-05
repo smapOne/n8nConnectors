@@ -97,8 +97,8 @@ export async function executeSmaps(
 
 		case 'setExternalDataAccessDefaultLanguageValueForSmap': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
-			const language = this.getNodeParameter('language', i) as string;
-			responseData = await smaponeApiRequest.call(this, 'PUT', `/intern/Smaps/${encodeURIComponent(smapId)}/settings/ExternalDataAccessDefaultLanguage`, { language });
+			const body = this.getNodeParameter('body', i) as string;
+			responseData = await smaponeApiRequest.call(this, 'PUT', `/intern/Smaps/${encodeURIComponent(smapId)}/settings/ExternalDataAccessDefaultLanguage`, { body });
 			break;
 		}
 
