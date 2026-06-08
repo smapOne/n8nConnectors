@@ -62,8 +62,6 @@ import { previewSmapsRecordsDescription } from './resources/preview/smapsRecords
 import { executePreviewSmapsRecords } from './resources/preview/smapsRecords/execute';
 import { previewSmapsTasksDescription } from './resources/preview/smapsTasks/description';
 import { executePreviewSmapsTasks } from './resources/preview/smapsTasks/execute';
-import { externalScimDescription } from './resources/external/scim/description';
-import { executeExternalScim } from './resources/external/scim/execute';
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -100,10 +98,6 @@ export class Smapone implements INodeType {
 					{
 						name: 'Preview',
 						value: 'preview',
-					},
-					{
-						name: 'External',
-						value: 'external',
 					},
 				],
 				default: 'intern',
@@ -244,24 +238,6 @@ export class Smapone implements INodeType {
 				],
 				default: 'previewSmaps',
 			},
-			{
-				displayName: 'Resource',
-				name: 'resource',
-				type: 'options',
-				noDataExpression: true,
-				displayOptions: {
-					show: {
-						apiScope: ['external'],
-					},
-				},
-				options: [
-					{
-						name: '[External] SCIM',
-						value: 'externalScim',
-					},
-				],
-				default: 'externalScim',
-			},
 
 			//intern
 			...accountDescription,
@@ -294,8 +270,6 @@ export class Smapone implements INodeType {
 			...previewSmapsRecordsDescription,
 			...previewSmapsTasksDescription,
 
-			//external
-			...externalScimDescription,
 		],
 		
 	};
@@ -558,17 +532,6 @@ export class Smapone implements INodeType {
 
 					case 'previewSmapsTasks':
 						responseData = await executePreviewSmapsTasks.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-
-					//external
-					case 'externalScim':
-						responseData = await executeExternalScim.call(
 							this,
 							i,
 							operation,
