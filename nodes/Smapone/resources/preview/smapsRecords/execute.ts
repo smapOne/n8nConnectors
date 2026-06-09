@@ -108,7 +108,7 @@ export async function executePreviewSmapsRecords(
 					smapId,
 				)}/Versions/${encodeURIComponent(
 					majorVersion,
-				)}/Reports/Slots/${slotPosition}/Records/Export/pdf`,
+				)}/Reports/Slots/${encodeURIComponent(slotPosition,)}/Records/Export/pdf`,
 			);
 
 			break;
