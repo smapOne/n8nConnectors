@@ -50,6 +50,7 @@ export const usersTokensDescription: INodeProperties[] = [
 	{
 		displayName: 'Token ID',
 		name: 'tokenId',
+		// eslint-disable-next-line n8n-nodes-base/node-param-type-options-password-missing
 		type: 'string',
 		required: true,
 		default: '',

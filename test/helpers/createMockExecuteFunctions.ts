@@ -1,5 +1,3 @@
-import { vi } from 'vitest';
-
 import type {
 	IDataObject,
 	IExecuteFunctions,
@@ -26,7 +24,7 @@ export function createMockExecuteFunctions(
 		parameters: {},
 	};
 
-	const mock: Partial<IExecuteFunctions> = {
+	return {
 		getNodeParameter: vi.fn((name: string, index: number) => {
 			if (index !== itemIndex) {
 				throw new Error(`Unexpected item index ${index}, expected ${itemIndex}`);
@@ -40,14 +38,10 @@ export function createMockExecuteFunctions(
 		}),
 		getNode: vi.fn(() => node),
 		helpers: {
-			returnJsonArray: vi.fn(
-				(data: IDataObject | IDataObject[]): INodeExecutionData[] => {
-					const items = Array.isArray(data) ? data : [data];
-					return items.map((json) => ({ json }));
-				},
-			),
+			returnJsonArray: (data: IDataObject | IDataObject[]): INodeExecutionData[] => {
+				const items = Array.isArray(data) ? data : [data];
+				return items.map((json) => ({ json }));
+			},
 		},
-	};
-
-	return mock as IExecuteFunctions;
+	} as unknown as IExecuteFunctions;
 }

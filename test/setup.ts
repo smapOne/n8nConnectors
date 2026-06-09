@@ -1,5 +1,3 @@
-import { beforeEach, vi } from 'vitest';
-
 import type { IDataObject } from 'n8n-workflow';
 
 import { setSmaponeApiRequestMock } from './helpers/apiMockStore';

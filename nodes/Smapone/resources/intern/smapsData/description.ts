@@ -165,10 +165,9 @@ export const smapsDataDescription: INodeProperties[] = [
 	},
 
 	{
-		displayName: 'Mark as exported',
+		displayName: 'Mark as Exported',
 		name: 'markAsExported',
 		type: 'boolean',
-		required: false,
 		default: false,
 		displayOptions: {
 			show: {
@@ -188,14 +187,14 @@ export const smapsDataDescription: INodeProperties[] = [
 				],
 			},
 		},
+		// eslint-disable-next-line n8n-nodes-base/node-param-description-boolean-without-whether
 		description: 'Mark read records as exported',
 	},
 
 	{
-		displayName: 'Generate random values',
+		displayName: 'Generate Random Values',
 		name: 'generateRandomValues',
 		type: 'boolean',
-		required: false,
 		default: false,
 		displayOptions: {
 			show: {
@@ -206,11 +205,12 @@ export const smapsDataDescription: INodeProperties[] = [
 				],
 			},
 		},
-		description: 'true if the generated record should contain random data or false to create static data based on the definition',
+		// eslint-disable-next-line n8n-nodes-base/node-param-description-boolean-without-whether
+		description: 'True if the generated record should contain random data or false to create static data based on the definition',
 	},
 
 	{
-		displayName: 'Output format',
+		displayName: 'Output Format',
 		name: 'format',
 		type: 'options',
 		options: [
@@ -247,11 +247,11 @@ export const smapsDataDescription: INodeProperties[] = [
 				],
 			},
 		},
-		description: 'Output Format(.json, .xml or .pdf), Default is Json. Available values : Json, Pdf, Xml',
+		description: 'Output Format(.JSON, .xml or .pdf), Default is JSON. Available values : JSON, Pdf, Xml.',
 	},
 
 	{
-		displayName: 'Record state filter',
+		displayName: 'Record State Filter',
 		name: 'state',
 		type: 'options',
 		options: [
@@ -286,7 +286,7 @@ export const smapsDataDescription: INodeProperties[] = [
 				],
 			},
 		},
-		description: 'filter the records for state new = 1, exported = 2 or incomplete = 3',
+		description: 'Filter the records for state new = 1, exported = 2 or incomplete = 3',
 	},
 
 	{
@@ -331,7 +331,6 @@ export const smapsDataDescription: INodeProperties[] = [
 		displayName: 'Use Default',
 		name: 'useDefault',
 		type: 'boolean',
-		required: false,
 		default: false,
 		displayOptions: {
 			show: {
@@ -343,7 +342,8 @@ export const smapsDataDescription: INodeProperties[] = [
 				],
 			},
 		},
-		description: 'If true a new template is generated and the uploaded app template will be ignored.',
+		// eslint-disable-next-line n8n-nodes-base/node-param-description-boolean-without-whether
+		description: 'If true a new template is generated and the uploaded app template will be ignored',
 	},
 
 	{

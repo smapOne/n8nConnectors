@@ -49,7 +49,7 @@ export const accountDescription: INodeProperties[] = [
 				action: 'Update a settings value',
 			},
 		],
-		default: 'get',
+		default: 'getAccount',
 	},
 
 	{

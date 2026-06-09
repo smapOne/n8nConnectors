@@ -29,9 +29,13 @@
   "files": [
     "dist"
   ],
+  "exclude": [
+    "test",
+    "vitest.config.mjs"
+  ],
   "n8n": {
     "n8nNodesApiVersion": 1,
-    "strict": false,
+    "strict": true,
     "credentials": [
       "dist/credentials/SmaponeApi.credentials.js"
     ],

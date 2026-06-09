@@ -123,7 +123,6 @@ export const smapsDefinitionDescription: INodeProperties[] = [
 		displayName: 'Generate Template?',
 		name: 'skipTemplate',
 		type: 'boolean',
-		required: false,
 		default: false,
 		displayOptions: {
 			show: {
@@ -132,7 +131,8 @@ export const smapsDefinitionDescription: INodeProperties[] = [
 				operation: ['validateDefinitionOfGivenSmap'],
 			},
 		},
-		description: 'if a template shall be generated or not',
+		// eslint-disable-next-line n8n-nodes-base/node-param-description-boolean-without-whether
+		description: 'If a template shall be generated or not',
 	},
 
 	{
@@ -148,6 +148,6 @@ export const smapsDefinitionDescription: INodeProperties[] = [
 				operation: ['overwriteDefinitionOfGivenSmap'],
 			},
 		},
-		description: 'version for update',
+		description: 'Version for update',
 	},
 ];

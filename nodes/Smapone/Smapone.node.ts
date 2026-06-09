@@ -1,3 +1,4 @@
+/* eslint-disable n8n-nodes-base/node-param-resource-with-plural-option */
 import {
 	JsonObject,
 	NodeApiError,

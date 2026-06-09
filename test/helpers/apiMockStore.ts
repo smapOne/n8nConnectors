@@ -1,16 +1,21 @@
-import type { Mock } from 'vitest';
-
 import type { IDataObject } from 'n8n-workflow';
 
-export type SmaponeApiRequestMock = Mock<
-	[
-		method: string,
-		endpoint: string,
-		body?: IDataObject | string,
-		qs?: IDataObject,
-	],
-	Promise<IDataObject | IDataObject[]>
->;
+export type SmaponeApiRequestCall = [
+	method: string,
+	endpoint: string,
+	body?: IDataObject | string,
+	qs?: IDataObject,
+];
+
+export type SmaponeApiRequestMock = ((
+	...args: SmaponeApiRequestCall
+) => Promise<IDataObject | IDataObject[]>) & {
+	mock: {
+		calls: SmaponeApiRequestCall[];
+	};
+	mockReset: () => void;
+	mockResolvedValue: (value: IDataObject | IDataObject[]) => SmaponeApiRequestMock;
+};
 
 let smaponeApiRequestMock: SmaponeApiRequestMock | undefined;
 

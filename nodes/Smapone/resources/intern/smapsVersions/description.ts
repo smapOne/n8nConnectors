@@ -86,7 +86,6 @@ export const smapsVersionsDescription: INodeProperties[] = [
 		displayName: 'Update Edit Version',
 		name: 'updateEditVersion',
 		type: 'boolean',
-		required: false,
 		default: false,
 		displayOptions: {
 			show: {
@@ -97,6 +96,6 @@ export const smapsVersionsDescription: INodeProperties[] = [
 				],
 			},
 		},
-		description: 'if the edit version should be updated too.',
+		description: 'Whether the edit version should be updated too',
 	},
 ];

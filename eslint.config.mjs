@@ -1,23 +1,3 @@
-import tseslint from 'typescript-eslint';
+import { config } from '@n8n/node-cli/eslint';
 
-export default [
-	{
-		ignores: [
-			'dist/**',
-			'node_modules/**',
-		],
-	},
-
-	...tseslint.configs.recommended,
-
-	{
-		settings: {
-			'import/resolver': {
-				typescript: true,
-				node: {
-					extensions: ['.js', '.ts'],
-				},
-			},
-		},
-	},
-];
+export default config;

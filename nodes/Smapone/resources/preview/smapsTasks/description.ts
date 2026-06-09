@@ -1,3 +1,4 @@
+/* eslint-disable n8n-nodes-base/node-param-operation-option-action-miscased */
 import type { INodeProperties } from 'n8n-workflow';
 
 export const previewSmapsTasksDescription: INodeProperties[] = [
