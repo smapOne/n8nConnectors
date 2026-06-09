@@ -546,7 +546,7 @@ export class Smapone implements INodeType {
 				}
 
 				if (responseData === undefined) {
-					throw new NodeApiError(this.getNode(), {message: 'The operation "${operation}" is not supported for resource "${resource}".'});
+					throw new NodeApiError(this.getNode(), {message: `The operation "${operation}" is not supported for resource "${resource}".`,});
 				}
 
 				const executionData = this.helpers.constructExecutionMetaData(
