@@ -16,17 +16,19 @@ The Connector contains all Endpoints for the following API routes:
 
 ## Credentials
 
-All operations are authorized by an accessToken, that you can manage in your smapOne profile. This token is sent via Basic Access Authorization as password (Base64 encoding!).
-Further instructions can be found on the [smapOne API page](https://platform.smapone.com/swagger/index.html?urls.primaryName=intern).
+The node uses the **Smapone API** credential with HTTP Basic Authentication:
+
+* **Username** — your smapOne username
+* **Password** — your smapOne password
+
+n8n sends these credentials as Basic Auth on each request. Further API details are in the [smapOne intern API documentation](https://platform.smapone.com/swagger/index.html?urls.primaryName=intern).
 
 ## Compatibility
 
-Tested with the following versions:
-* "eslint": 9.32.0
-* "prettier": 3.6.2
-* "release-it": ^19.0.4
-* "typescript": 5.9.2
-* "n8": 2.19.5
+Tested with:
+
+* **n8n** 2.19.5
+* **n8n-workflow** ^2.16.0
 
 ## Resources
 
