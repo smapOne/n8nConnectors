@@ -17,6 +17,7 @@ The Connector contains all Endpoints for the following API routes:
 ## Credentials
 
 All operations are authorized by an accessToken, that you can manage in your smapOne profile. This token is sent via Basic Access Authorization as password (Base64 encoding!).
+Further instructions can be found on the [smapOne API page](https://platform.smapone.com/swagger/index.html?urls.primaryName=intern).
 
 ## Compatibility
 
