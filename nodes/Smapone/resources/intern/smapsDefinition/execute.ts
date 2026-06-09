@@ -15,30 +15,6 @@ export async function executeSmapsDefinition(
 	let responseData: IDataObject | IDataObject[];
 
 	switch (operation) {
-		/*case 'getTemplateForSmap': {
-			const smapId = this.getNodeParameter('smapId', i) as string;
-			const version = this.getNodeParameter('version', i) as string;
-			const useDefault = this.getNodeParameter('useDefault', i) as boolean;
-			const inline = this.getNodeParameter('inline', i) as boolean;
-
-			const qs: IDataObject = {
-				useDefault,
-				inline
-			};
-
-			responseData = await smaponeApiRequest.call(
-				this,
-				'GET',
-				`/intern/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/${encodeURIComponent(version)}/Definition/ReportTemplate`,
-				{},
-				qs
-			);
-
-			break;
-		}*/
-
 		case 'loadDefinitionForSmap': {
 			const smapId = this.getNodeParameter('smapId', i) as string;
 			const version = this.getNodeParameter('version', i) as string;
@@ -62,9 +38,6 @@ export async function executeSmapsDefinition(
 			const qs: IDataObject = {
 				revision,
 			};
-
-			//console.log(body);
-			//console.log(qs);
 
 			responseData = await smaponeApiRequest.call(
 				this,

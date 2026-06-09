@@ -15,16 +15,12 @@ import { bricksDescription } from './resources/intern/bricks/description';
 import { executeBricks } from './resources/intern/bricks/execute';
 import { bricksDefinitionDescription } from './resources/intern/bricksDefinition/description';
 import { executeBricksDefinition } from './resources/intern/bricksDefinition/execute';
-//import { corporationManagementDescription } from './resources/intern/corporationManagement/description';
-//import { executeCorporationManagement } from './resources/intern/corporationManagement/execute';
 import { dataSourceDescription } from './resources/intern/dataSource/description';
 import { executeDataSource } from './resources/intern/dataSource/execute';
 import { dataSourceDefinitionDescription } from './resources/intern/dataSourceDefinition/description';
 import { executeDataSourceDefinition } from './resources/intern/dataSourceDefinition/execute';
 import { dataSourceVersionDescription } from './resources/intern/dataSourceVersion/description';
 import { executeDataSourceVersion } from './resources/intern/dataSourceVersion/execute';
-//import { exportTemplateDescription } from './resources/intern/exportTemplate/description';
-//import { executeExportTemplate } from './resources/intern/exportTemplate/execute';
 import { groupsDescription } from './resources/intern/groups/description';
 import { executeGroups } from './resources/intern/groups/execute';
 import { helperDescription } from './resources/intern/helper/description';
@@ -41,14 +37,8 @@ import { smapsNotificationDescription } from './resources/intern/smapsNotificati
 import { executeSmapsNotification } from './resources/intern/smapsNotification/execute';
 import { smapsTasksDescription } from './resources/intern/smapsTasks/description';
 import { executeSmapsTasks } from './resources/intern/smapsTasks/execute';
-//import { smapsTokensDescription } from './resources/intern/smapsTokens/description';
-//import { executeSmapsTokens } from './resources/intern/smapsTokens/execute';
 import { smapsVersionsDescription } from './resources/intern/smapsVersions/description';
 import { executeSmapsVersions } from './resources/intern/smapsVersions/execute';
-//import { subscriptionsDescription } from './resources/intern/subscriptions/description';
-//import { executeSubscriptions } from './resources/intern/subscriptions/execute';
-//import { subscriptionsTokensDescription } from './resources/intern/subscriptionsTokens/description';
-//import { executeSubscriptionsTokens } from './resources/intern/subscriptionsTokens/execute';
 import { templatesDescription } from './resources/intern/templates/description';
 import { executeTemplates } from './resources/intern/templates/execute';
 import { userImportDescription } from './resources/intern/userImport/description';
@@ -126,10 +116,6 @@ export class Smapone implements INodeType {
 						name: 'BricksDefinition',
 						value: 'bricksDefinition',
 					},
-					/*{
-						name: 'CorporationManagement',
-						value: 'corporationManagement',
-					},*/
 					{
 						name: 'DataSource',
 						value: 'dataSource',
@@ -142,10 +128,6 @@ export class Smapone implements INodeType {
 						name: 'DataSourceVersion',
 						value: 'dataSourceVersion',
 					},
-					/*{
-						name: 'ExportTemplate',
-						value: 'exportTemplate',
-					},*/
 					{
 						name: 'Groups',
 						value: 'groups',
@@ -178,22 +160,10 @@ export class Smapone implements INodeType {
 						name: 'SmapsTasks',
 						value: 'smapsTasks',
 					},
-					/*{
-						name: 'SmapsTokens',
-						value: 'smapsTokens',
-					},*/
 					{
 						name: 'SmapsVersions',
 						value: 'smapsVersions',
 					},
-					/*{
-						name: 'Subscriptions',
-						value: 'subscriptions',
-					},
-					{
-						name: 'SubscriptionsTokens',
-						value: 'subscriptionsTokens',
-					},*/
 					{
 						name: 'Templates',
 						value: 'templates',
@@ -244,11 +214,9 @@ export class Smapone implements INodeType {
 			...accountDescription,
 			...bricksDescription,
 			...bricksDefinitionDescription,
-			//...corporationManagementDescription,
 			...dataSourceDescription,
 			...dataSourceDefinitionDescription,
 			...dataSourceVersionDescription,
-			//...exportTemplateDescription,
 			...groupsDescription,
 			...helperDescription,
 			...scenariosDescription,
@@ -257,10 +225,7 @@ export class Smapone implements INodeType {
 			...smapsDefinitionDescription,
 			...smapsNotificationDescription,
 			...smapsTasksDescription,
-			//...smapsTokensDescription,
 			...smapsVersionsDescription,
-			//...subscriptionsDescription,
-			//...subscriptionsTokensDescription,
 			...templatesDescription,
 			...userImportDescription,
 			...usersDescription,
@@ -284,13 +249,6 @@ export class Smapone implements INodeType {
 
 				const resource = this.getNodeParameter('resource', i) as string;
 				const operation = this.getNodeParameter('operation', i) as string;
-
-				/*console.log(
-					'Operation:',
-					operation,
-					'---',
-					JSON.stringify(items[i], null, 2),
-				);*/
 
 				let responseData;
 
@@ -323,15 +281,6 @@ export class Smapone implements INodeType {
 					
 						break;
 					
-					/*case 'corporationManagement':
-						responseData = await executeCorporationManagement.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;*/
-					
 					case 'dataSource':
 						responseData = await executeDataSource.call(
 							this,
@@ -358,15 +307,6 @@ export class Smapone implements INodeType {
 						);
 					
 						break;
-					
-					/*case 'exportTemplate':
-						responseData = await executeExportTemplate.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;*/
 					
 					case 'groups':
 						responseData = await executeGroups.call(
@@ -440,15 +380,6 @@ export class Smapone implements INodeType {
 					
 						break;
 
-					/*case 'smapsTokens':
-						responseData = await executeSmapsTokens.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;*/
-
 					case 'smapsVersions':
 						responseData = await executeSmapsVersions.call(
 							this,
@@ -457,24 +388,6 @@ export class Smapone implements INodeType {
 						);
 					
 						break;
-
-					/*case 'subscriptions':
-						responseData = await executeSubscriptions.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-					case 'subscriptionsTokens':
-						responseData = await executeSubscriptionsTokens.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;*/
 
 					case 'templates':
 						responseData = await executeTemplates.call(

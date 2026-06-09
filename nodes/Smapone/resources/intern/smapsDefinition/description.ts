@@ -13,11 +13,6 @@ export const smapsDefinitionDescription: INodeProperties[] = [
 			},
 		},
 		options: [
-			/*{
-				name: 'Get Template for Smap',
-				value: 'getTemplateForSmap',
-				action: 'Get the template for a smap',
-			},*/
 			{
 				name: 'Load Definition for Smap',
 				value: 'loadDefinitionForSmap',
@@ -86,38 +81,6 @@ export const smapsDefinitionDescription: INodeProperties[] = [
 		},
 		description: 'JSON body sent to the API',
 	},
-	
-	/*{
-		displayName: 'Use Default',
-		name: 'useDefault',
-		type: 'boolean',
-		required: false,
-		default: false,
-		displayOptions: {
-			show: {
-				apiScope: ['intern'],
-				resource: ['smapsDefinition'],
-				operation: ['getTemplateForSmap'],
-			},
-		},
-		description: 'If true a new default template based on the master template is generated.',
-	},
-
-	{
-		displayName: 'Inline or Attachment',
-		name: 'inline',
-		type: 'boolean',
-		required: false,
-		default: false,
-		displayOptions: {
-			show: {
-				apiScope: ['intern'],
-				resource: ['smapsDefinition'],
-				operation: ['getTemplateForSmap'],
-			},
-		},
-		description: 'inline or attachment',
-	},*/
 
 	{
 		displayName: 'Generate Template?',

@@ -34,19 +34,6 @@ export async function smaponeApiRequest(
 	}
 
 	try {
-		/*console.log('================ REQUEST ================');
-		console.log('Method:', method);
-		console.log('URL:', options.url);
-
-		if (options.qs) {
-			console.log('Query:', JSON.stringify(options.qs, null, 2));
-		}
-
-		if (options.body) {
-			console.log('Body:', JSON.stringify(options.body, null, 2));
-		}
-
-		console.log('========================================');*/
 
 		return await this.helpers.httpRequestWithAuthentication.call(
 			this,
