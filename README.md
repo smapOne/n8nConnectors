@@ -1,6 +1,6 @@
-# n8n Connector for smapOne API
+# n8n Node for smapOne API
 
-This is a repository for n8n connectors.
+This is a repository for n8n nodes.
 It contains an n8n community node. It lets you use the smapOne API in your n8n workflows.
 
 ## Installation
@@ -9,14 +9,15 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Operations
 
-The Connector contains all Endpoints for the following API routes:
+This Node contains all relevant Endpoints for the following API routes:
 * [smapOne API - internal scope](https://platform.smapone.com/swagger/index.html?urls.primaryName=intern)
 * [smapOne API - preview scope](https://platform.smapone.com/swagger/index.html?urls.primaryName=preview)
 
+This node targets the smapOne cloud API at platform.smapone.com.
 
 ## Credentials
 
-The node uses the **Smapone API** credential with HTTP Basic Authentication:
+This node uses the **Smapone API** credential with HTTP Basic Authentication:
 
 * **Username** — your smapOne username
 * **Password** — your smapOne password
