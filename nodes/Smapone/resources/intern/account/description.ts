@@ -19,7 +19,7 @@ export const accountDescription: INodeProperties[] = [
 				action: 'Delete a setting',
 			},
 			{
-				name: 'Get',
+				name: 'Get Account',
 				value: 'getAccount',
 				action: 'Get account information',
 			},

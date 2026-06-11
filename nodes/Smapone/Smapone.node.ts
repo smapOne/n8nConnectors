@@ -1,4 +1,4 @@
-/* eslint-disable n8n-nodes-base/node-param-resource-with-plural-option */
+ 
 import {
 	JsonObject,
 	NodeApiError,
@@ -9,50 +9,26 @@ import {
 	type INodeTypeDescription,
 } from 'n8n-workflow';
 
-import { accountDescription } from './resources/intern/account/description';
-import { executeAccount } from './resources/intern/account/execute';
-import { bricksDescription } from './resources/intern/bricks/description';
-import { executeBricks } from './resources/intern/bricks/execute';
-import { bricksDefinitionDescription } from './resources/intern/bricksDefinition/description';
-import { executeBricksDefinition } from './resources/intern/bricksDefinition/execute';
-import { dataSourceDescription } from './resources/intern/dataSource/description';
-import { executeDataSource } from './resources/intern/dataSource/execute';
-import { dataSourceDefinitionDescription } from './resources/intern/dataSourceDefinition/description';
-import { executeDataSourceDefinition } from './resources/intern/dataSourceDefinition/execute';
-import { dataSourceVersionDescription } from './resources/intern/dataSourceVersion/description';
-import { executeDataSourceVersion } from './resources/intern/dataSourceVersion/execute';
-import { groupsDescription } from './resources/intern/groups/description';
-import { executeGroups } from './resources/intern/groups/execute';
-import { helperDescription } from './resources/intern/helper/description';
-import { executeHelper } from './resources/intern/helper/execute';
-import { scenariosDescription } from './resources/intern/scenarios/description';
-import { executeScenarios } from './resources/intern/scenarios/execute';
-import { smapsDescription } from './resources/intern/smaps/description';
-import { executeSmaps } from './resources/intern/smaps/execute';
-import { smapsDataDescription } from './resources/intern/smapsData/description';
-import { executeSmapsData } from './resources/intern/smapsData/execute';
-import { smapsDefinitionDescription } from './resources/intern/smapsDefinition/description';
-import { executeSmapsDefinition } from './resources/intern/smapsDefinition/execute';
-import { smapsNotificationDescription } from './resources/intern/smapsNotification/description';
-import { executeSmapsNotification } from './resources/intern/smapsNotification/execute';
-import { smapsTasksDescription } from './resources/intern/smapsTasks/description';
-import { executeSmapsTasks } from './resources/intern/smapsTasks/execute';
-import { smapsVersionsDescription } from './resources/intern/smapsVersions/description';
-import { executeSmapsVersions } from './resources/intern/smapsVersions/execute';
-import { templatesDescription } from './resources/intern/templates/description';
-import { executeTemplates } from './resources/intern/templates/execute';
-import { userImportDescription } from './resources/intern/userImport/description';
-import { executeUserImport } from './resources/intern/userImport/execute';
-import { usersDescription } from './resources/intern/users/description';
-import { executeUsers } from './resources/intern/users/execute';
-import { usersTokensDescription } from './resources/intern/usersTokens/description';
-import { executeUsersTokens } from './resources/intern/usersTokens/execute';
-import { previewSmapsDescription } from './resources/preview/smaps/description';
-import { executePreviewSmaps } from './resources/preview/smaps/execute';
-import { previewSmapsRecordsDescription } from './resources/preview/smapsRecords/description';
-import { executePreviewSmapsRecords } from './resources/preview/smapsRecords/execute';
-import { previewSmapsTasksDescription } from './resources/preview/smapsTasks/description';
-import { executePreviewSmapsTasks } from './resources/preview/smapsTasks/execute';
+import { internResources } from './resources/internRegistry';
+import { previewResources } from './resources/previewRegistry';
+import type { ResourceDefinition, ResourceExecuteFn } from './resources/types';
+
+function buildResourceOptions(resources: ResourceDefinition[]) {
+	return resources.map((resource) => ({
+		name: resource.displayName,
+		value: resource.value,
+	}));
+}
+
+function buildResourceDescriptions(resources: ResourceDefinition[]) {
+	return resources.flatMap((resource) => resource.description);
+}
+
+function buildExecuteLookup(resources: ResourceDefinition[]): Record<string, ResourceExecuteFn> {
+	return Object.fromEntries(resources.map((resource) => [resource.value, resource.execute]));
+}
+
+const resourceExecuteLookup = buildExecuteLookup([...internResources, ...previewResources]);
 
 export class Smapone implements INodeType {
 	description: INodeTypeDescription = {
@@ -103,85 +79,8 @@ export class Smapone implements INodeType {
 						apiScope: ['intern'],
 					},
 				},
-				options: [
-					{
-						name: 'Account',
-						value: 'account',
-					},
-					{
-						name: 'Bricks',
-						value: 'bricks',
-					},
-					{
-						name: 'BricksDefinition',
-						value: 'bricksDefinition',
-					},
-					{
-						name: 'DataSource',
-						value: 'dataSource',
-					},
-					{
-						name: 'DataSourceDefinition',
-						value: 'dataSourceDefinition',
-					},
-					{
-						name: 'DataSourceVersion',
-						value: 'dataSourceVersion',
-					},
-					{
-						name: 'Groups',
-						value: 'groups',
-					},
-					{
-						name: 'Helper',
-						value: 'helper',
-					},
-					{
-						name: 'Scenarios',
-						value: 'scenarios',
-					},
-					{
-						name: 'Smaps',
-						value: 'smaps',
-					},
-					{
-						name: 'SmapsData',
-						value: 'smapsData',
-					},
-					{
-						name: 'SmapsDefinition',
-						value: 'smapsDefinition',
-					},
-					{
-						name: 'SmapsNotification',
-						value: 'smapsNotification',
-					},
-					{
-						name: 'SmapsTasks',
-						value: 'smapsTasks',
-					},
-					{
-						name: 'SmapsVersions',
-						value: 'smapsVersions',
-					},
-					{
-						name: 'Templates',
-						value: 'templates',
-					},
-					{
-						name: 'UserImport',
-						value: 'userImport',
-					},
-					{
-						name: 'Users',
-						value: 'users',
-					},
-					{
-						name: 'UsersTokens',
-						value: 'usersTokens',
-					},
-				],
-				default: 'account',
+				options: buildResourceOptions(internResources),
+				default: 'smaps',
 			},
 			{
 				displayName: 'Resource',
@@ -193,274 +92,36 @@ export class Smapone implements INodeType {
 						apiScope: ['preview'],
 					},
 				},
-				options: [
-					{
-						name: '[Preview] Smaps',
-						value: 'previewSmaps',
-					},
-					{
-						name: '[Preview] SmapsRecords',
-						value: 'previewSmapsRecords',
-					},
-					{
-						name: '[Preview] SmapsTasks',
-						value: 'previewSmapsTasks',
-					},
-				],
+				options: buildResourceOptions(previewResources),
 				default: 'previewSmaps',
 			},
-
-			//intern
-			...accountDescription,
-			...bricksDescription,
-			...bricksDefinitionDescription,
-			...dataSourceDescription,
-			...dataSourceDefinitionDescription,
-			...dataSourceVersionDescription,
-			...groupsDescription,
-			...helperDescription,
-			...scenariosDescription,
-			...smapsDescription,
-			...smapsDataDescription,
-			...smapsDefinitionDescription,
-			...smapsNotificationDescription,
-			...smapsTasksDescription,
-			...smapsVersionsDescription,
-			...templatesDescription,
-			...userImportDescription,
-			...usersDescription,
-			...usersTokensDescription,
-
-			//preview
-			...previewSmapsDescription,
-			...previewSmapsRecordsDescription,
-			...previewSmapsTasksDescription,
-
+			...buildResourceDescriptions(internResources),
+			...buildResourceDescriptions(previewResources),
 		],
-		
 	};
 
-		async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
 		const returnData: INodeExecutionData[] = [];
 
 		for (let i = 0; i < items.length; i++) {
 			try {
-
 				const resource = this.getNodeParameter('resource', i) as string;
 				const operation = this.getNodeParameter('operation', i) as string;
 
-				let responseData;
-
-				switch (resource) {
-					//intern
-					case 'account':
-						responseData = await executeAccount.call(
-							this,
-							i,
-							operation,
-						);
-						
-						break;
-					
-					case 'bricks':
-						responseData = await executeBricks.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-					
-					case 'bricksDefinition':
-						responseData = await executeBricksDefinition.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-					
-					case 'dataSource':
-						responseData = await executeDataSource.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-					
-					case 'dataSourceDefinition':
-						responseData = await executeDataSourceDefinition.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-					case 'dataSourceVersion':
-						responseData = await executeDataSourceVersion.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-					
-					case 'groups':
-						responseData = await executeGroups.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-					
-					case 'helper':
-						responseData = await executeHelper.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-					
-					case 'scenarios':
-						responseData = await executeScenarios.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-					
-					case 'smaps':
-						responseData = await executeSmaps.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-					
-					case 'smapsData':
-						responseData = await executeSmapsData.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-					case 'smapsDefinition':
-						responseData = await executeSmapsDefinition.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-					case 'smapsNotification':
-						responseData = await executeSmapsNotification.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-					case 'smapsTasks':
-						responseData = await executeSmapsTasks.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-					case 'smapsVersions':
-						responseData = await executeSmapsVersions.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-					case 'templates':
-						responseData = await executeTemplates.call(
-							this,
-							i,
-							operation,
-						);
-
-						break;
-
-					case 'userImport':
-						responseData = await executeUserImport.call(
-							this,
-							i,
-							operation,
-						);
-
-						break;
-
-					case 'users':
-						responseData = await executeUsers.call(
-							this,
-							i,
-							operation,
-						);
-
-						break;
-
-					case 'usersTokens':
-						responseData = await executeUsersTokens.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-					//preview
-					case 'previewSmaps':
-						responseData = await executePreviewSmaps.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-					case 'previewSmapsRecords':
-						responseData = await executePreviewSmapsRecords.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-					case 'previewSmapsTasks':
-						responseData = await executePreviewSmapsTasks.call(
-							this,
-							i,
-							operation,
-						);
-					
-						break;
-
-					default:
-						throw new NodeApiError(this.getNode(), {
-							message: `The resource "${resource}" is not supported.`,
-						});
+				const executeResource = resourceExecuteLookup[resource];
+				if (!executeResource) {
+					throw new NodeApiError(this.getNode(), {
+						message: `The resource "${resource}" is not supported.`,
+					});
 				}
 
+				const responseData = await executeResource.call(this, i, operation);
+
 				if (responseData === undefined) {
-					throw new NodeApiError(this.getNode(), {message: `The operation "${operation}" is not supported for resource "${resource}".`,});
+					throw new NodeApiError(this.getNode(), {
+						message: `The operation "${operation}" is not supported for resource "${resource}".`,
+					});
 				}
 
 				const executionData = this.helpers.constructExecutionMetaData(

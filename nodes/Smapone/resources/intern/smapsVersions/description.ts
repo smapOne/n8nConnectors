@@ -98,4 +98,20 @@ export const smapsVersionsDescription: INodeProperties[] = [
 		},
 		description: 'Whether the edit version should be updated too',
 	},
+
+	{
+		displayName: 'Request Body',
+		name: 'body',
+		type: 'json',
+		default: '{"minor": true}',
+		displayOptions: {
+			show: {
+				apiScope: ['intern'],
+				resource: ['smapsVersions'],
+				operation: [
+					'publishSmap',
+				],
+			},
+		},
+	},
 ];
