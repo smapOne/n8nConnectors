@@ -31,6 +31,10 @@ Tested with:
 * **n8n** 2.19.5
 * **n8n-workflow** ^2.16.0
 
+## Support
+
+If you find an issue or bug with this node, please contact smapOne at [support@smapone.com](mailto:support@smapone.com).
+
 ## Resources
 
 * [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
