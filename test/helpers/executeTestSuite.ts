@@ -2,7 +2,10 @@ import { NodeApiError } from 'n8n-workflow';
 import type { IDataObject, IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
 
 import { createMockExecuteFunctions } from './createMockExecuteFunctions';
-import { getSmaponeApiRequestMock } from './apiMockStore';
+import {
+	getSmaponeApiDownloadRequestMock,
+	getSmaponeApiRequestMock,
+} from './apiMockStore';
 
 export interface OperationTestCase {
 	operation: string;
@@ -11,7 +14,15 @@ export interface OperationTestCase {
 	parameters?: Record<string, unknown>;
 	body?: IDataObject | string;
 	qs?: IDataObject;
+	requestOptions?: {
+		responseFormat?: 'json' | 'text';
+		accept?: string;
+	};
 	emptyBody?: boolean;
+	downloadRequest?: boolean;
+	fileNamePattern?: RegExp;
+	mimeType?: string;
+	testName?: string;
 }
 
 type ExecuteFn = (
@@ -29,37 +40,70 @@ export function createExecuteTestSuite(
 	describe(resourceName, () => {
 		for (const testCase of testCases) {
 			describe(testCase.operation, () => {
-				it(`calls smaponeApiRequest with ${testCase.method} ${testCase.endpoint}`, async () => {
-					const smaponeApiRequestMock = getSmaponeApiRequestMock();
-					const parameters = {
-						...options?.defaultParameters,
-						...testCase.parameters,
-					};
-					const mockCtx = createMockExecuteFunctions({ parameters });
+				it(
+					testCase.testName ??
+						(testCase.downloadRequest
+							? `calls smaponeApiDownloadRequest with ${testCase.method} ${testCase.endpoint}`
+							: `calls smaponeApiRequest with ${testCase.method} ${testCase.endpoint}`),
+					async () => {
+						const smaponeApiRequestMock = getSmaponeApiRequestMock();
+						const smaponeApiDownloadRequestMock = getSmaponeApiDownloadRequestMock();
+						const parameters = {
+							...options?.defaultParameters,
+							...testCase.parameters,
+						};
+						const mockCtx = createMockExecuteFunctions({ parameters });
 
-					await executeFn.call(mockCtx, 0, testCase.operation);
+						await executeFn.call(mockCtx, 0, testCase.operation);
 
-					expect(smaponeApiRequestMock).toHaveBeenCalledOnce();
+						if (testCase.downloadRequest) {
+							expect(smaponeApiRequestMock).not.toHaveBeenCalled();
+							expect(smaponeApiDownloadRequestMock).toHaveBeenCalledOnce();
 
-					const call = smaponeApiRequestMock.mock.calls[0];
-					expect(call[0]).toBe(testCase.method);
-					expect(call[1]).toBe(testCase.endpoint);
+							const call = smaponeApiDownloadRequestMock.mock.calls[0];
+							expect(call[0]).toBe(testCase.endpoint);
 
-					if (testCase.body !== undefined) {
-						expect(call[2]).toEqual(testCase.body);
-					} else if (testCase.emptyBody) {
-						expect(call[2]).toEqual({});
-					}
+							if (testCase.fileNamePattern) {
+								expect(call[1]).toMatch(testCase.fileNamePattern);
+							}
 
-					if (testCase.qs !== undefined) {
-						expect(call[3]).toEqual(testCase.qs);
-					}
-				});
+							expect(call[2]).toBe(testCase.mimeType ?? 'application/zip');
+
+							if (testCase.qs !== undefined) {
+								expect(call[3]).toEqual(testCase.qs);
+							}
+
+							return;
+						}
+
+						expect(smaponeApiDownloadRequestMock).not.toHaveBeenCalled();
+						expect(smaponeApiRequestMock).toHaveBeenCalledOnce();
+
+						const call = smaponeApiRequestMock.mock.calls[0];
+						expect(call[0]).toBe(testCase.method);
+						expect(call[1]).toBe(testCase.endpoint);
+
+						if (testCase.body !== undefined) {
+							expect(call[2]).toEqual(testCase.body);
+						} else if (testCase.emptyBody) {
+							expect(call[2]).toEqual({});
+						}
+
+						if (testCase.qs !== undefined) {
+							expect(call[3]).toEqual(testCase.qs);
+						}
+
+						if (testCase.requestOptions !== undefined) {
+							expect(call[4]).toEqual(testCase.requestOptions);
+						}
+					},
+				);
 			});
 		}
 
 		it('throws NodeApiError for unsupported operation', async () => {
 			const smaponeApiRequestMock = getSmaponeApiRequestMock();
+			const smaponeApiDownloadRequestMock = getSmaponeApiDownloadRequestMock();
 			const mockCtx = createMockExecuteFunctions(
 				options?.defaultParameters
 					? { parameters: options.defaultParameters }
@@ -75,6 +119,7 @@ export function createExecuteTestSuite(
 			).rejects.toThrow(`not supported for resource "${resourceName}"`);
 
 			expect(smaponeApiRequestMock).not.toHaveBeenCalled();
+			expect(smaponeApiDownloadRequestMock).not.toHaveBeenCalled();
 		});
 	});
 }

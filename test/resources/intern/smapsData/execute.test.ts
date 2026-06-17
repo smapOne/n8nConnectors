@@ -13,6 +13,8 @@ const encodedMajorVersion = encodeURIComponent(majorVersion);
 const encodedRecordId = encodeURIComponent(recordId);
 const encodedFileId = encodeURIComponent(fileId);
 const encodedFormat = encodeURIComponent(format);
+const timestampPattern = String.raw`\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}`;
+const dataRecordFileEndpoint = `/intern/Smaps/${encodedSmapId}/Versions/${encodedVersion}/Data/${encodedRecordId}/Files/${encodedFileId}`;
 
 createExecuteTestSuite('smapsData', executeSmapsData, [
 	{
@@ -185,8 +187,11 @@ createExecuteTestSuite('smapsData', executeSmapsData, [
 	{
 		operation: 'loadFileForSpecificDataRecord',
 		method: 'GET',
-		endpoint: `/intern/Smaps/${encodedSmapId}/Versions/${encodedVersion}/Data/${encodedRecordId}/Files/${encodedFileId}`,
+		endpoint: dataRecordFileEndpoint,
 		parameters: { smapId, version, recordId, fileId },
+		downloadRequest: true,
+		fileNamePattern: new RegExp(`^file_id_${timestampPattern}\\.png$`),
+		mimeType: 'image/png',
 	},
 	{
 		operation: 'fillTemplateWithDummyData',

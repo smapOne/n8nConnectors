@@ -5,7 +5,7 @@ import {
 	type INodeExecutionData,
 } from 'n8n-workflow';
 
-import { smaponeApiRequest } from '../../../GenericFunctions';
+import { buildSmaponeFileName, smaponeApiDownloadRequest, smaponeApiRequest } from '../../../GenericFunctions';
 
 export async function executeSmapsData(
 	this: IExecuteFunctions,
@@ -369,15 +369,18 @@ export async function executeSmapsData(
 			const version = this.getNodeParameter('version', i) as string;
 			const recordId = this.getNodeParameter('recordId', i) as string;
 			const fileId = this.getNodeParameter('fileId', i) as string;
+			const endpoint = `/intern/Smaps/${encodeURIComponent(
+				smapId,
+			)}/Versions/${encodeURIComponent(version)}/Data/${encodeURIComponent(
+				recordId,
+			)}/Files/${encodeURIComponent(fileId)}`;
 
-			responseData = await smaponeApiRequest.call(
+			return await smaponeApiDownloadRequest.call(
 				this,
-				'GET',
-				`/intern/Smaps/${encodeURIComponent(smapId)}/Versions/${encodeURIComponent(
-					version,
-				)}/Data/${encodeURIComponent(recordId)}/Files/${encodeURIComponent(fileId)}`,
+				endpoint,
+				buildSmaponeFileName(fileId, 'png'),
+				'image/png',
 			);
-			break;
 		}
 
 		case 'fillTemplateWithDummyData': {

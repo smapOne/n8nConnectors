@@ -40,11 +40,6 @@ export const previewSmapsRecordsDescription: INodeProperties[] = [
 				action: '[Preview] Get all files meta data',
 			},
 			{
-				name: '[Preview] Load All Data Records for Current Version',
-				value: 'loadAllDataRecordsForCurrentVersion',
-				action: '[Preview] Load all data records for current version',
-			},
-			{
 				name: '[Preview] Load All Data Records for Major Version',
 				value: 'loadAllDataRecordsForMajorVersion',
 				action: '[Preview] Load all data records for major version',
@@ -71,6 +66,109 @@ export const previewSmapsRecordsDescription: INodeProperties[] = [
 			},
 		],
 		default: 'loadAllDataRecordsForSmap',
+	},
+
+	{
+		displayName: 'Output Format',
+		name: 'outputFormat',
+		type: 'options',
+		options: [
+			{
+				name: 'JSON',
+				value: 'Json',
+			},
+			{
+				name: 'XML',
+				value: 'Xml',
+			},
+			{
+				name: 'PDF',
+				value: 'Pdf',
+			},
+		],
+		default: 'Json',
+		displayOptions: {
+			show: {
+				apiScope: ['preview'],
+				resource: ['previewSmapsRecords'],
+				operation: ['loadAllDataRecordsForSmap', 'loadAllDataRecordsForMajorVersion'],
+			},
+		},
+		description: 'Output format for the data records response',
+	},
+
+	{
+		displayName: 'Record Output Format',
+		name: 'recordOutputFormat',
+		type: 'options',
+		options: [
+			{
+				name: 'DOC',
+				value: 'Doc',
+			},
+			{
+				name: 'DOCX',
+				value: 'Docx',
+			},
+			{
+				name: 'HTML',
+				value: 'Html',
+			},
+			{
+				name: 'JSON',
+				value: 'Json',
+			},
+			{
+				name: 'PDF',
+				value: 'Pdf',
+			},
+			{
+				name: 'TXT',
+				value: 'Txt',
+			},
+			{
+				name: 'XML',
+				value: 'Xml',
+			},
+		],
+		default: 'Json',
+		displayOptions: {
+			show: {
+				apiScope: ['preview'],
+				resource: ['previewSmapsRecords'],
+				operation: ['loadSingleDataRecord'],
+			},
+		},
+		description: 'Output format for the single data record response',
+	},
+
+	{
+		displayName: 'Report Output Format',
+		name: 'reportOutputFormat',
+		type: 'options',
+		options: [
+			{
+				name: 'PDF',
+				value: 'Pdf',
+			},
+			{
+				name: 'DOC',
+				value: 'Doc',
+			},
+			{
+				name: 'DOCX',
+				value: 'Docx',
+			},
+		],
+		default: 'Pdf',
+		displayOptions: {
+			show: {
+				apiScope: ['preview'],
+				resource: ['previewSmapsRecords'],
+				operation: ['loadReportForSpecificDataRecord'],
+			},
+		},
+		description: 'Output format for the report download',
 	},
 
 	{
@@ -178,7 +276,7 @@ export const previewSmapsRecordsDescription: INodeProperties[] = [
 		displayName: 'Slot Position',
 		name: 'slotPosition',
 		type: 'number',
-		default: 0,
+		default: 1,
 		required: true,
 		displayOptions: {
 			show: {
@@ -186,5 +284,26 @@ export const previewSmapsRecordsDescription: INodeProperties[] = [
 				operation: ['exportDataRecordsAsPdfForSpecificSlot'],
 			},
 		},
+		description: 'The slot position of a report template (1 - main report, 2 - additional report)',
+	},
+
+	{
+		displayName: 'Smap Name',
+		name: 'smapName',
+		type: 'string',
+		default: 'smapone-export',
+		required: true,
+		displayOptions: {
+			show: {
+				apiScope: ['preview'],
+				resource: ['previewSmapsRecords'],
+				operation: [
+					'exportDataRecordsAsExcel',
+					'exportDataRecordsAsPdf',
+					'exportDataRecordsAsPdfForSpecificSlot',
+				],
+			},
+		},
+		description: 'Name used for the generated download file',
 	},
 ];

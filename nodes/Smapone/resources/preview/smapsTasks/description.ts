@@ -40,19 +40,9 @@ export const previewSmapsTasksDescription: INodeProperties[] = [
 				action: '[Preview] Load all tasks for all versions of the smap',
 			},
 			{
-				name: '[Preview] Load All Tasks for All Versions as Format',
-				value: 'loadAllTasksForAllVersionsAsFormat',
-				action: '[Preview] Load all tasks for all versions of the smap as format',
-			},
-			{
 				name: '[Preview] Load All Tasks for Given Major Version',
 				value: 'loadAllTasksForGivenMajorVersion',
 				action: '[Preview] Load all tasks of all minor versions for a given major version',
-			},
-			{
-				name: '[Preview] Load All Tasks for Given Major Version as Format',
-				value: 'loadAllTasksForGivenMajorVersionAsFormat',
-				action: '[Preview] Load all tasks of all minor versions for a given major version as format',
 			},
 			{
 				name: '[Preview] Load File for Specific Task',
@@ -64,13 +54,98 @@ export const previewSmapsTasksDescription: INodeProperties[] = [
 				value: 'loadSingleTask',
 				action: '[Preview] Load a single task',
 			},
-			{
-				name: '[Preview] Load Single Task as Format',
-				value: 'loadSingleTaskAsFormat',
-				action: '[Preview] Load a single task as format',
-			},
 		],
 		default: 'loadAllTasksForAllVersions',
+	},
+
+	{
+		displayName: 'Output Format',
+		name: 'outputFormat',
+		type: 'options',
+		options: [
+			{
+				name: 'JSON',
+				value: 'Json',
+			},
+			{
+				name: 'PDF',
+				value: 'Pdf',
+			},
+			{
+				name: 'XML',
+				value: 'Xml',
+			},
+		],
+		default: 'Json',
+		displayOptions: {
+			show: {
+				apiScope: ['preview'],
+				resource: ['previewSmapsTasks'],
+				operation: ['loadAllTasksForAllVersions', 'loadAllTasksForGivenMajorVersion'],
+			},
+		},
+		description: 'Output format for the tasks response',
+	},
+
+	{
+		displayName: 'Task Output Format',
+		name: 'taskOutputFormat',
+		type: 'options',
+		options: [
+			{
+				name: 'DOC',
+				value: 'Doc',
+			},
+			{
+				name: 'DOCX',
+				value: 'Docx',
+			},
+			{
+				name: 'HTML',
+				value: 'Html',
+			},
+			{
+				name: 'JSON',
+				value: 'Json',
+			},
+			{
+				name: 'PDF',
+				value: 'Pdf',
+			},
+			{
+				name: 'TXT',
+				value: 'Txt',
+			},
+			{
+				name: 'XML',
+				value: 'Xml',
+			},
+		],
+		default: 'Json',
+		displayOptions: {
+			show: {
+				apiScope: ['preview'],
+				resource: ['previewSmapsTasks'],
+				operation: ['loadSingleTask'],
+			},
+		},
+		description: 'Output format for the single task response',
+	},
+
+	{
+		displayName: 'Use Default',
+		name: 'useDefault',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				apiScope: ['preview'],
+				resource: ['previewSmapsTasks'],
+				operation: ['loadSingleTask'],
+			},
+		},
+		description:
+			'Whether a new template is generated and the uploaded app template will be ignored',
 	},
 
 	{
@@ -98,10 +173,7 @@ export const previewSmapsTasksDescription: INodeProperties[] = [
 			show: {
 				apiScope: ['preview'],
 				resource: ['previewSmapsTasks'],
-				operation: [
-					'loadAllTasksForGivenMajorVersion',
-					'loadAllTasksForGivenMajorVersionAsFormat',
-				],
+				operation: ['loadAllTasksForGivenMajorVersion'],
 			},
 		},
 		description: 'Major version of the smap',
@@ -124,7 +196,6 @@ export const previewSmapsTasksDescription: INodeProperties[] = [
 					'getAllFilesMetaDataForSpecificTask',
 					'loadFileForSpecificTask',
 					'loadSingleTask',
-					'loadSingleTaskAsFormat',
 				],
 			},
 		},
@@ -147,7 +218,6 @@ export const previewSmapsTasksDescription: INodeProperties[] = [
 					'getAllFilesMetaDataForSpecificTask',
 					'loadFileForSpecificTask',
 					'loadSingleTask',
-					'loadSingleTaskAsFormat',
 				],
 			},
 		},
@@ -168,26 +238,6 @@ export const previewSmapsTasksDescription: INodeProperties[] = [
 			},
 		},
 		description: 'ID of the file',
-	},
-
-	{
-		displayName: 'Format',
-		name: 'format',
-		type: 'string',
-		required: true,
-		default: 'json',
-		displayOptions: {
-			show: {
-				apiScope: ['preview'],
-				resource: ['previewSmapsTasks'],
-				operation: [
-					'loadAllTasksForAllVersionsAsFormat',
-					'loadAllTasksForGivenMajorVersionAsFormat',
-					'loadSingleTaskAsFormat',
-				],
-			},
-		},
-		description: 'Response format',
 	},
 
 	{

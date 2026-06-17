@@ -5,7 +5,14 @@ import {
 	type INodeExecutionData,
 } from 'n8n-workflow';
 
-import { smaponeApiRequest } from '../../../GenericFunctions';
+import {
+	smaponeApiRequest,
+	buildSmaponeExportFileName,
+	buildSmaponeFileName,
+	smaponeApiDownloadRequest,
+	isBinaryExecutionData,
+} from '../../../GenericFunctions';
+import { smaponeApiPreviewFormatRequest } from '../previewFormatRequest';
 
 export async function executePreviewSmapsRecords(
 	this: IExecuteFunctions,
@@ -17,116 +24,117 @@ export async function executePreviewSmapsRecords(
 	const smapId = this.getNodeParameter('smapId', i) as string;
 
 	switch (operation) {
-		case 'loadAllDataRecordsForSmap':
-			responseData = await smaponeApiRequest.call(
+		case 'loadAllDataRecordsForSmap': {
+			const outputFormat = this.getNodeParameter('outputFormat', i) as string;
+			const endpoint = `/preview/Smaps/${encodeURIComponent(smapId)}/Records`;
+			const result = await smaponeApiPreviewFormatRequest.call(
 				this,
 				'GET',
-				`/preview/Smaps/${encodeURIComponent(smapId)}/Records`,
+				endpoint,
+				outputFormat,
+				smapId,
 			);
-			break;
 
-		case 'loadAllDataRecordsForCurrentVersion':
-			responseData = await smaponeApiRequest.call(
-				this,
-				'GET',
-				`/preview/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/Current/Records`,
-			);
+			if (isBinaryExecutionData(result)) {
+				return result;
+			}
+
+			responseData = result;
+
 			break;
+		}
 
 		case 'loadAllDataRecordsForMajorVersion': {
-			const majorVersion = this.getNodeParameter(
-				'majorVersion',
-				i,
-			) as string;
-
-			responseData = await smaponeApiRequest.call(
+			const majorVersion = this.getNodeParameter('majorVersion', i) as string;
+			const outputFormat = this.getNodeParameter('outputFormat', i) as string;
+			const endpoint = `/preview/Smaps/${encodeURIComponent(
+				smapId,
+			)}/Versions/${encodeURIComponent(majorVersion)}/Records`;
+			const result = await smaponeApiPreviewFormatRequest.call(
 				this,
 				'GET',
-				`/preview/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/${encodeURIComponent(majorVersion)}/Records`,
+				endpoint,
+				outputFormat,
+				smapId,
 			);
+
+			if (isBinaryExecutionData(result)) {
+				return result;
+			}
+
+			responseData = result;
 
 			break;
 		}
 
 		case 'exportDataRecordsAsExcel': {
-			const majorVersion = this.getNodeParameter(
-				'majorVersion',
-				i,
-			) as string;
+			const majorVersion = this.getNodeParameter('majorVersion', i) as string;
+			const smapName = this.getNodeParameter('smapName', i) as string;
+			const fileName = buildSmaponeExportFileName(smapName);
 
-			responseData = await smaponeApiRequest.call(
+			return await smaponeApiDownloadRequest.call(
 				this,
-				'GET',
-				`/preview/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/${encodeURIComponent(
-					majorVersion,
-				)}/Records/Export/xlsx`,
+				`/preview/Smaps/${encodeURIComponent(smapId)}/Versions/${encodeURIComponent(majorVersion)}/Records/Export/xlsx`,
+				fileName,
+				'application/zip',
 			);
-
-			break;
 		}
 
 		case 'exportDataRecordsAsPdf': {
-			const majorVersion = this.getNodeParameter(
-				'majorVersion',
-				i,
-			) as string;
+			const majorVersion = this.getNodeParameter('majorVersion', i) as string;
+			const smapName = this.getNodeParameter('smapName', i) as string;
+			const fileName = buildSmaponeExportFileName(smapName);
 
-			responseData = await smaponeApiRequest.call(
+			return await smaponeApiDownloadRequest.call(
 				this,
-				'GET',
 				`/preview/Smaps/${encodeURIComponent(
 					smapId,
-				)}/Versions/${encodeURIComponent(
-					majorVersion,
-				)}/Records/Export/pdf`,
+				)}/Versions/${encodeURIComponent(majorVersion)}/Records/Export/pdf`,
+				fileName,
+				'application/zip',
 			);
-
-			break;
 		}
 
 		case 'exportDataRecordsAsPdfForSpecificSlot': {
-			const majorVersion = this.getNodeParameter(
-				'majorVersion',
-				i,
-			) as string;
+			const majorVersion = this.getNodeParameter('majorVersion', i) as string;
+			const slotPosition = this.getNodeParameter('slotPosition', i) as number;
+			const smapName = this.getNodeParameter('smapName', i) as string;
+			const fileName = buildSmaponeExportFileName(smapName);
 
-			const slotPosition = this.getNodeParameter(
-				'slotPosition',
-				i,
-			) as number;
-
-			responseData = await smaponeApiRequest.call(
+			return await smaponeApiDownloadRequest.call(
 				this,
-				'GET',
 				`/preview/Smaps/${encodeURIComponent(
 					smapId,
 				)}/Versions/${encodeURIComponent(
 					majorVersion,
 				)}/Reports/Slots/${encodeURIComponent(slotPosition,)}/Records/Export/pdf`,
+				fileName,
+				'application/zip',
 			);
-
-			break;
 		}
 
 		case 'loadSingleDataRecord': {
 			const version = this.getNodeParameter('version', i) as string;
 			const recordId = this.getNodeParameter('recordId', i) as string;
-
-			responseData = await smaponeApiRequest.call(
+			const recordOutputFormat = this.getNodeParameter('recordOutputFormat', i) as string;
+			const endpoint = `/preview/Smaps/${encodeURIComponent(
+				smapId,
+			)}/Versions/${encodeURIComponent(
+				version,
+			)}/Records/${encodeURIComponent(recordId)}`;
+			const result = await smaponeApiPreviewFormatRequest.call(
 				this,
 				'GET',
-				`/preview/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/${encodeURIComponent(
-					version,
-				)}/Records/${encodeURIComponent(recordId)}`,
+				endpoint,
+				recordOutputFormat,
+				recordId,
 			);
+
+			if (isBinaryExecutionData(result)) {
+				return result;
+			}
+
+			responseData = result;
 
 			break;
 		}
@@ -151,25 +159,23 @@ export async function executePreviewSmapsRecords(
 		case 'loadReportForSpecificDataRecord': {
 			const version = this.getNodeParameter('version', i) as string;
 			const recordId = this.getNodeParameter('recordId', i) as string;
+			const reportTemplateId = this.getNodeParameter('reportTemplateId', i) as string;
+			const reportOutputFormat = this.getNodeParameter('reportOutputFormat', i) as string;
+			const endpoint = `/preview/Smaps/${encodeURIComponent(
+				smapId,
+			)}/Versions/${encodeURIComponent(
+				version,
+			)}/Records/${encodeURIComponent(
+				recordId,
+			)}/Reports/${encodeURIComponent(reportTemplateId)}`;
 
-			const reportTemplateId = this.getNodeParameter(
-				'reportTemplateId',
-				i,
-			) as string;
-
-			responseData = await smaponeApiRequest.call(
+			return await smaponeApiPreviewFormatRequest.call(
 				this,
 				'GET',
-				`/preview/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/${encodeURIComponent(
-					version,
-				)}/Records/${encodeURIComponent(
-					recordId,
-				)}/Reports/${encodeURIComponent(reportTemplateId)}`,
-			);
-
-			break;
+				endpoint,
+				reportOutputFormat,
+				reportTemplateId,
+			) as INodeExecutionData[];
 		}
 
 		case 'getAllFilesMetaData': {
@@ -193,20 +199,20 @@ export async function executePreviewSmapsRecords(
 			const version = this.getNodeParameter('version', i) as string;
 			const recordId = this.getNodeParameter('recordId', i) as string;
 			const fileId = this.getNodeParameter('fileId', i) as string;
+			const endpoint = `/preview/Smaps/${encodeURIComponent(
+				smapId,
+			)}/Versions/${encodeURIComponent(
+				version,
+			)}/Records/${encodeURIComponent(
+				recordId,
+			)}/Files/${encodeURIComponent(fileId)}`;
 
-			responseData = await smaponeApiRequest.call(
+			return await smaponeApiDownloadRequest.call(
 				this,
-				'GET',
-				`/preview/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/${encodeURIComponent(
-					version,
-				)}/Records/${encodeURIComponent(
-					recordId,
-				)}/Files/${encodeURIComponent(fileId)}`,
+				endpoint,
+				buildSmaponeFileName(fileId, 'png'),
+				'image/png',
 			);
-
-			break;
 		}
 
 		default:

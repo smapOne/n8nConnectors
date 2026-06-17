@@ -5,7 +5,13 @@ import {
 	type INodeExecutionData,
 } from 'n8n-workflow';
 
-import { smaponeApiRequest } from '../../../GenericFunctions';
+import {
+	smaponeApiRequest,
+	buildSmaponeFileName,
+	smaponeApiDownloadRequest,
+	isBinaryExecutionData,
+} from '../../../GenericFunctions';
+import { smaponeApiPreviewFormatRequest } from '../previewFormatRequest';
 
 export async function executePreviewSmapsTasks(
 	this: IExecuteFunctions,
@@ -17,80 +23,72 @@ export async function executePreviewSmapsTasks(
 	const smapId = this.getNodeParameter('smapId', i) as string;
 
 	switch (operation) {
-		case 'loadAllTasksForAllVersions':
-			responseData = await smaponeApiRequest.call(
+		case 'loadAllTasksForAllVersions': {
+			const outputFormat = this.getNodeParameter('outputFormat', i) as string;
+			const endpoint = `/preview/Smaps/${encodeURIComponent(smapId)}/Tasks`;
+			const result = await smaponeApiPreviewFormatRequest.call(
 				this,
 				'GET',
-				`/preview/Smaps/${encodeURIComponent(smapId)}/Tasks`,
+				endpoint,
+				outputFormat,
+				smapId,
 			);
-			break;
 
-		case 'loadAllTasksForAllVersionsAsFormat': {
-			const format = this.getNodeParameter('format', i) as string;
+			if (isBinaryExecutionData(result)) {
+				return result;
+			}
 
-			responseData = await smaponeApiRequest.call(
-				this,
-				'GET',
-				`/preview/Smaps/${encodeURIComponent(smapId)}/Tasks.${encodeURIComponent(format)}`,
-			);
+			responseData = result;
+
 			break;
 		}
 
 		case 'loadAllTasksForGivenMajorVersion': {
 			const majorVersion = this.getNodeParameter('majorVersion', i) as string;
-
-			responseData = await smaponeApiRequest.call(
+			const outputFormat = this.getNodeParameter('outputFormat', i) as string;
+			const endpoint = `/preview/Smaps/${encodeURIComponent(
+				smapId,
+			)}/Versions/${encodeURIComponent(majorVersion)}/Tasks`;
+			const result = await smaponeApiPreviewFormatRequest.call(
 				this,
 				'GET',
-				`/preview/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/${encodeURIComponent(majorVersion)}/Tasks`,
+				endpoint,
+				outputFormat,
+				smapId,
 			);
-			break;
-		}
 
-		case 'loadAllTasksForGivenMajorVersionAsFormat': {
-			const majorVersion = this.getNodeParameter('majorVersion', i) as string;
-			const format = this.getNodeParameter('format', i) as string;
+			if (isBinaryExecutionData(result)) {
+				return result;
+			}
 
-			responseData = await smaponeApiRequest.call(
-				this,
-				'GET',
-				`/preview/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/${encodeURIComponent(majorVersion)}/Tasks.${encodeURIComponent(format)}`,
-			);
+			responseData = result;
+
 			break;
 		}
 
 		case 'loadSingleTask': {
 			const version = this.getNodeParameter('version', i) as string;
 			const taskId = this.getNodeParameter('taskId', i) as string;
-
-			responseData = await smaponeApiRequest.call(
+			const taskOutputFormat = this.getNodeParameter('taskOutputFormat', i) as string;
+			const useDefault = this.getNodeParameter('useDefault', i) as boolean;
+			const endpoint = `/preview/Smaps/${encodeURIComponent(
+				smapId,
+			)}/Versions/${encodeURIComponent(version)}/Tasks/${encodeURIComponent(taskId)}`;
+			const result = await smaponeApiPreviewFormatRequest.call(
 				this,
 				'GET',
-				`/preview/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/${encodeURIComponent(version)}/Tasks/${encodeURIComponent(taskId)}`,
+				endpoint,
+				taskOutputFormat,
+				taskId,
+				{ useDefault },
 			);
-			break;
-		}
 
-		case 'loadSingleTaskAsFormat': {
-			const version = this.getNodeParameter('version', i) as string;
-			const taskId = this.getNodeParameter('taskId', i) as string;
-			const format = this.getNodeParameter('format', i) as string;
+			if (isBinaryExecutionData(result)) {
+				return result;
+			}
 
-			responseData = await smaponeApiRequest.call(
-				this,
-				'GET',
-				`/preview/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/${encodeURIComponent(version)}/Tasks/${encodeURIComponent(
-					taskId,
-				)}.${encodeURIComponent(format)}`,
-			);
+			responseData = result;
+
 			break;
 		}
 
@@ -105,6 +103,7 @@ export async function executePreviewSmapsTasks(
 					smapId,
 				)}/Versions/${encodeURIComponent(version)}/Tasks/${encodeURIComponent(taskId)}`,
 			);
+
 			break;
 		}
 
@@ -119,6 +118,7 @@ export async function executePreviewSmapsTasks(
 					smapId,
 				)}/Versions/${encodeURIComponent(version)}/Tasks/${encodeURIComponent(taskId)}/Files`,
 			);
+
 			break;
 		}
 
@@ -126,17 +126,18 @@ export async function executePreviewSmapsTasks(
 			const version = this.getNodeParameter('version', i) as string;
 			const taskId = this.getNodeParameter('taskId', i) as string;
 			const fileId = this.getNodeParameter('fileId', i) as string;
+			const endpoint = `/preview/Smaps/${encodeURIComponent(
+				smapId,
+			)}/Versions/${encodeURIComponent(version)}/Tasks/${encodeURIComponent(
+				taskId,
+			)}/Files/${encodeURIComponent(fileId)}`;
 
-			responseData = await smaponeApiRequest.call(
+			return await smaponeApiDownloadRequest.call(
 				this,
-				'GET',
-				`/preview/Smaps/${encodeURIComponent(
-					smapId,
-				)}/Versions/${encodeURIComponent(version)}/Tasks/${encodeURIComponent(
-					taskId,
-				)}/Files/${encodeURIComponent(fileId)}`,
+				endpoint,
+				buildSmaponeFileName(fileId, 'png'),
+				'image/png',
 			);
-			break;
 		}
 
 		case 'createTaskForGivenVersion': {
@@ -151,6 +152,7 @@ export async function executePreviewSmapsTasks(
 				)}/Versions/${encodeURIComponent(version)}/Tasks`,
 				body,
 			);
+
 			break;
 		}
 
@@ -167,6 +169,7 @@ export async function executePreviewSmapsTasks(
 				)}/Versions/${encodeURIComponent(version)}/Tasks/${encodeURIComponent(taskId)}/State`,
 				body,
 			);
+
 			break;
 		}
 
