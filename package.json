@@ -1,6 +1,6 @@
 {
   "name": "@smapone/n8n-nodes-smapone",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "smapOne API",
   "license": "MIT",
   "homepage": "https://github.com/smapOne/n8nConnectors#readme",
