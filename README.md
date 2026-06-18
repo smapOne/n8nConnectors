@@ -18,9 +18,7 @@ This node targets the smapOne cloud API at platform.smapone.com.
 ## Credentials
 
 This node uses the **Smapone API** credential with HTTP Basic Authentication:
-
-* **Username** — your smapOne username
-* **Password** — your smapOne password
+All operations are authorized by an accessToken, that you can manage in your profile. Send this token via Basic Access Authorization as password (Base64 encoding!). You can use any set of characters as a dummy username.
 
 n8n sends these credentials as Basic Auth on each request. Further API details are in the [smapOne intern API documentation](https://platform.smapone.com/swagger/index.html?urls.primaryName=intern).
 
