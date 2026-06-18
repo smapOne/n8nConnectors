@@ -14,7 +14,7 @@ This Node contains all relevant Endpoints for the following API routes:
 * [smapOne API - preview scope](https://platform.smapone.com/swagger/index.html?urls.primaryName=preview)
 
 This node targets the smapOne cloud API at platform.smapone.com.
-
+ 
 ## Credentials
 
 This node uses the **Smapone API** credential with HTTP Basic Authentication:
